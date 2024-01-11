@@ -1,5 +1,5 @@
 import { NextApiRequest, NextApiResponse } from "next";
-import airportsData from "../../../public/airports.json";
+import airportsData from "../../data/airports.json";
 
 type AirportsData = {
   code: string;

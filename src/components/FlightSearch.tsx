@@ -1,20 +1,32 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import styles from "./FlightSearch.module.css";
 
 const currentTime = new Date().toISOString().split("T")[0];
 
+type flight = {
+  id: string;
+  departureAirport: string;
+  arrivalAirport: string;
+  airline: string;
+  departureTime: string;
+  arrivalTime: string;
+  price: number;
+};
+
 export default function FlightSearch() {
   const [isRoundTrip, setIsRoundTrip] = useState(false);
+  const [flightData, setFlightData] = useState<flight[]>([]);
 
-  function handleFlightSearch(event: React.FormEvent<HTMLFormElement>) {
+  async function handleFlightSearch(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
     const formData = new FormData(event.currentTarget);
     const departureAirport = formData.get("departureAirport");
     const arrivalAirport = formData.get("arrivalAirport");
-    const departureDate = formData.get("date");
-    const returnDate = isRoundTrip ? formData.get("date") : null;
+    const departureDate = formData.get("departureDate");
+    const returnDate = isRoundTrip ? formData.get("returnDate") : null;
 
     console.log(
+      "data before query params:",
       "departureAirport:",
       departureAirport,
       "arrivalAirport:",
@@ -24,6 +36,24 @@ export default function FlightSearch() {
       "returnDate:",
       returnDate
     );
+
+    const queryParams = new URLSearchParams({
+      departureAirport: departureAirport as string,
+      arrivalAirport: arrivalAirport as string,
+      departureDate: departureDate as string,
+      returnDate: returnDate as string,
+    });
+
+    console.log("queryParams:", queryParams);
+
+    try {
+      const response = await fetch(`/api/flights?${queryParams.toString()}`);
+      const data = await response.json();
+      console.log("data:", data);
+      setFlightData(data);
+    } catch (error) {
+      console.error("Error fetching flight data", error);
+    }
   }
 
   function handleAirportSearch() {}
@@ -78,7 +108,7 @@ export default function FlightSearch() {
             />
           </div>
           <div className={styles.inputGroup}>
-            <label className={styles.searchLabel} htmlFor="date">
+            <label className={styles.searchLabel} htmlFor="departureDate">
               Departure
             </label>
             <input
@@ -91,7 +121,7 @@ export default function FlightSearch() {
           </div>
           {isRoundTrip && (
             <div className={styles.inputGroup}>
-              <label className={styles.searchLabel} htmlFor="date">
+              <label className={styles.searchLabel} htmlFor="returnDate">
                 Return
               </label>
               <input
@@ -109,6 +139,26 @@ export default function FlightSearch() {
           </button>
         </form>
       </div>
+
+      {flightData?.length > 0 ? (
+        <div className={styles.flightResults}>
+          <h2>Flight Results</h2>
+          <ul>
+            {flightData.map((flight) => (
+              <li key={flight.id}>
+                <p>Airline: {flight.airline}</p>
+                <p>Departure Airport: {flight.departureAirport}</p>
+                <p>Arrival Airport: {flight.arrivalAirport}</p>
+                <p>Departure Time: {flight.departureTime}</p>
+                <p>Arrival Time: {flight.arrivalTime}</p>
+                <p>Price: ${flight.price}</p>
+              </li>
+            ))}
+          </ul>
+        </div>
+      ) : (
+        <p>No flights found</p>
+      )}
     </main>
   );
 }
