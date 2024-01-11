@@ -1,0 +1,31 @@
+{
+  "airports": [
+    { "code": "LHR", "name": "Heathrow Airport", "city": "London" },
+    { "code": "CDG", "name": "Charles de Gaulle Airport", "city": "Paris" },
+    { "code": "FRA", "name": "Frankfurt Airport", "city": "Frankfurt" },
+    {
+      "code": "AMS",
+      "name": "Amsterdam Airport Schiphol",
+      "city": "Amsterdam"
+    },
+    { "code": "BCN", "name": "Barcelona–El Prat Airport", "city": "Barcelona" },
+    { "code": "IST", "name": "Istanbul Airport", "city": "Istanbul" },
+    {
+      "code": "MAD",
+      "name": "Adolfo Suárez Madrid–Barajas Airport",
+      "city": "Madrid"
+    },
+    {
+      "code": "ATH",
+      "name": "Eleftherios Venizelos Airport",
+      "city": "Athens"
+    },
+    {
+      "code": "FCO",
+      "name": "Leonardo da Vinci–Fiumicino Airport",
+      "city": "Rome"
+    },
+    { "code": "ZRH", "name": "Zurich Airport", "city": "Zurich" },
+    { "code": "CPH", "name": "Copenhagen Airport", "city": "Copenhagen" }
+  ]
+}
