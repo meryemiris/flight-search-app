@@ -201,7 +201,7 @@
       "duration": 2.5
     },
     {
-      "id": "FL001",
+      "id": "FL021",
       "departureAirport": "AMS",
       "arrivalAirport": "FRA",
       "airline": "Turkish Airlines",
@@ -211,7 +211,7 @@
       "duration": 2.5
     },
     {
-      "id": "FL001",
+      "id": "FL022",
       "departureAirport": "AMS",
       "arrivalAirport": "FRA",
       "airline": "Air France",

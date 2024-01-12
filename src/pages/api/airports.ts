@@ -30,7 +30,7 @@ export default function handler(
   const asyncSelectOptions: AsyncSelectOption[] = filteredAirports.map(
     (airport) => ({
       value: airport.code,
-      label: `${airport.name} (${airport.city})`,
+      label: `${airport.name} (${airport.city}) - ${airport.code}`,
       data: airport,
     })
   );
