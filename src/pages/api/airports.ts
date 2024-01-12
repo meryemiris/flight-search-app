@@ -1,7 +1,7 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import airportsData from "../../data/airports.json";
 
-type Airport = {
+export type Airport = {
   code: string;
   name: string;
   city: string;

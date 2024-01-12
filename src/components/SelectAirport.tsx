@@ -1,5 +1,6 @@
 import AsyncSelect from "react-select/async";
-import styles from "./FlightSearch.module.css";
+import styles from "./SelectAirport.module.css";
+
 type Props = {
   loadOptions: (value: string) => Promise<any>;
   onChange: (value: any) => void;

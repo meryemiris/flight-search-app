@@ -2,9 +2,8 @@ import { useState } from "react";
 import styles from "./FlightSearch.module.css";
 import FlightList from "./FlightList";
 
-import SelectAirport from "./SelectAirport";
-
-const currentTime = new Date().toISOString().split("T")[0];
+import SearchForm from "./SearchForm";
+import { Airport } from "@/pages/api/airports";
 
 type Flight = {
   id: string;
@@ -15,12 +14,6 @@ type Flight = {
   arrivalTime: string;
   price: number;
   duration: number;
-};
-
-type Airport = {
-  code: string;
-  name: string;
-  city: string;
 };
 
 export default function FlightSearch() {
@@ -101,54 +94,13 @@ export default function FlightSearch() {
           />
           <label htmlFor="roundTrip">round trip</label>
         </div>
-        <form className={styles.searchForm} onSubmit={handleFlightSearch}>
-          <SelectAirport
-            label="From City/Airport"
-            loadOptions={fetchAirportOptions}
-            onChange={handleAirportSearch}
-            name="departureAirport"
-          />
 
-          <SelectAirport
-            label="To City/Airport"
-            loadOptions={fetchAirportOptions}
-            onChange={handleAirportSearch}
-            name="arrivalAirport"
-          />
-
-          <div className={styles.inputGroup}>
-            <label className={styles.searchLabel} htmlFor="departureDate">
-              Departure
-            </label>
-            <input
-              id="departureDate"
-              className={styles.dateInput}
-              type="date"
-              name="departureDate"
-              defaultValue={currentTime}
-              min={currentTime}
-            />
-          </div>
-          {isRoundTrip && (
-            <div className={styles.inputGroup}>
-              <label className={styles.searchLabel} htmlFor="returnDate">
-                Return
-              </label>
-              <input
-                id="returnDate"
-                className={styles.dateInput}
-                type="date"
-                name="returnDate"
-                min={currentTime}
-                defaultValue={currentTime}
-              />
-            </div>
-          )}
-
-          <button className={styles.searchButton} type="submit">
-            Find Flights
-          </button>
-        </form>
+        <SearchForm
+          handleFlightSearch={handleFlightSearch}
+          isRoundTrip={isRoundTrip}
+          fetchAirportOptions={fetchAirportOptions}
+          handleAirportSearch={handleAirportSearch}
+        />
       </div>
 
       <FlightList flights={flightData} />
