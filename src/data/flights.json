@@ -1,166 +1,224 @@
 {
   "flights": [
     {
-      "id": "FL002",
+      "id": "FL001",
       "departureAirport": "AMS",
       "arrivalAirport": "FRA",
       "airline": "Lufthansa",
       "departureTime": "2024-01-17T11:30:00",
       "arrivalTime": "2024-01-17T13:30:00",
-      "price": 200.0
+      "price": 200.0,
+      "duration": 2.0
     },
     {
-      "id": "FL003",
+      "id": "FL002",
       "departureAirport": "IST",
       "arrivalAirport": "MAD",
       "airline": "Turkish Airlines",
       "departureTime": "2024-01-20T14:00:00",
       "arrivalTime": "2024-01-20T17:30:00",
-      "price": 300.0
+      "price": 300.0,
+      "duration": 3.5
     },
     {
-      "id": "FL004",
+      "id": "FL003",
       "departureAirport": "ATH",
       "arrivalAirport": "FCO",
       "airline": "Aegean Airlines",
       "departureTime": "2024-01-22T09:00:00",
       "arrivalTime": "2024-01-22T11:30:00",
-      "price": 180.0
+      "price": 180.0,
+      "duration": 2.5
     },
     {
-      "id": "FL005",
+      "id": "FL004",
       "departureAirport": "ZRH",
       "arrivalAirport": "CPH",
       "airline": "Swiss International Air Lines",
       "departureTime": "2024-01-25T13:00:00",
       "arrivalTime": "2024-01-25T14:30:00",
-      "price": 220.0
+      "price": 220.0,
+      "duration": 1.5
     },
     {
-      "id": "FL006",
+      "id": "FL005",
       "departureAirport": "ARN",
       "arrivalAirport": "OSL",
       "airline": "Scandinavian Airlines",
       "departureTime": "2024-01-28T10:30:00",
       "arrivalTime": "2024-01-28T12:00:00",
-      "price": 180.0
+      "price": 180.0,
+      "duration": 1.5
     },
     {
-      "id": "FL007",
+      "id": "FL006",
       "departureAirport": "WAW",
       "arrivalAirport": "BRU",
       "airline": "LOT Polish Airlines",
       "departureTime": "2024-01-30T15:00:00",
       "arrivalTime": "2024-01-30T17:00:00",
-      "price": 200.0
+      "price": 200.0,
+      "duration": 2.0
     },
     {
-      "id": "FL008",
+      "id": "FL007",
       "departureAirport": "LIS",
       "arrivalAirport": "DUB",
       "airline": "TAP Air Portugal",
       "departureTime": "2024-01-30T09:30:00",
       "arrivalTime": "2024-01-30T11:00:00",
-      "price": 250.0
+      "price": 250.0,
+      "duration": 1.5
     },
     {
-      "id": "FL009",
+      "id": "FL008",
       "departureAirport": "FRA",
       "arrivalAirport": "AMS",
       "airline": "Lufthansa",
       "departureTime": "2024-01-30T14:00:00",
       "arrivalTime": "2024-01-30T15:30:00",
-      "price": 210.0
+      "price": 210.0,
+      "duration": 1.5
     },
     {
-      "id": "FL010",
+      "id": "FL009",
       "departureAirport": "BCN",
       "arrivalAirport": "MAD",
       "airline": "Iberia",
       "departureTime": "2024-01-30T10:00:00",
       "arrivalTime": "2024-01-30T11:30:00",
-      "price": 190.0
+      "price": 190.0,
+      "duration": 1.5
     },
     {
-      "id": "FL011",
+      "id": "FL010",
       "departureAirport": "IST",
       "arrivalAirport": "ATH",
       "airline": "Turkish Airlines",
       "departureTime": "2024-01-30T14:30:00",
       "arrivalTime": "2024-01-30T16:30:00",
-      "price": 300.0
+      "price": 300.0,
+      "duration": 2.0
     },
     {
-      "id": "FL012",
+      "id": "FL011",
       "departureAirport": "CPH",
       "arrivalAirport": "ARN",
       "airline": "SAS",
       "departureTime": "2024-01-30T09:30:00",
       "arrivalTime": "2024-01-30T10:30:00",
-      "price": 180.0
+      "price": 180.0,
+      "duration": 1.0
     },
     {
-      "id": "FL013",
+      "id": "FL012",
       "departureAirport": "OSL",
       "arrivalAirport": "WAW",
       "airline": "LOT Polish Airlines",
       "departureTime": "2024-01-30T13:00:00",
       "arrivalTime": "2024-01-30T15:00:00",
-      "price": 200.0
+      "price": 200.0,
+      "duration": 2.0
     },
     {
-      "id": "FL014",
+      "id": "FL013",
       "departureAirport": "BRU",
       "arrivalAirport": "LIS",
       "airline": "Brussels Airlines",
       "departureTime": "2024-01-30T11:00:00",
       "arrivalTime": "2024-01-30T12:30:00",
-      "price": 220.0
+      "price": 220.0,
+      "duration": 1.5
     },
     {
-      "id": "FL015",
+      "id": "FL014",
       "departureAirport": "DUB",
       "arrivalAirport": "CDG",
       "airline": "Air France",
       "departureTime": "2024-01-30T15:30:00",
       "arrivalTime": "2024-01-30T17:00:00",
-      "price": 250.0
+      "price": 250.0,
+      "duration": 1.5
     },
     {
-      "id": "FL016",
+      "id": "FL015",
       "departureAirport": "JFK",
       "arrivalAirport": "LAX",
       "airline": "Delta Air Lines",
       "departureTime": "2024-01-30T08:00:00",
       "arrivalTime": "2024-01-30T11:00:00",
-      "price": 400.0
+      "price": 400.0,
+      "duration": 3.0
     },
     {
-      "id": "FL017",
+      "id": "FL016",
       "departureAirport": "SFO",
       "arrivalAirport": "ORD",
       "airline": "United Airlines",
       "departureTime": "2024-01-30T12:30:00",
       "arrivalTime": "2024-01-30T15:00:00",
-      "price": 350.0
+      "price": 350.0,
+      "duration": 2.5
     },
     {
-      "id": "FL018",
+      "id": "FL017",
       "departureAirport": "ATL",
       "arrivalAirport": "DXB",
       "airline": "Emirates",
       "departureTime": "2024-01-30T10:30:00",
       "arrivalTime": "2024-01-30T18:00:00",
-      "price": 600.0
+      "price": 600.0,
+      "duration": 7.5
     },
     {
-      "id": "FL019",
+      "id": "FL018",
       "departureAirport": "LHR",
       "arrivalAirport": "CDG",
       "airline": "British Airways",
       "departureTime": "2024-01-30T15:30:00",
       "arrivalTime": "2024-01-30T17:00:00",
-      "price": 250.0
+      "price": 250.0,
+      "duration": 1.5
+    },
+    {
+      "id": "FL019",
+      "departureAirport": "JFK",
+      "arrivalAirport": "LAX",
+      "airline": "Delta Air Lines",
+      "departureTime": "2024-01-30T09:00:00",
+      "arrivalTime": "2024-01-30T11:00:00",
+      "price": 400.0,
+      "duration": 2.0
+    },
+    {
+      "id": "FL020",
+      "departureAirport": "SFO",
+      "arrivalAirport": "ORD",
+      "airline": "United Airlines",
+      "departureTime": "2024-01-30T14:30:00",
+      "arrivalTime": "2024-01-30T17:00:00",
+      "price": 350.0,
+      "duration": 2.5
+    },
+    {
+      "id": "FL001",
+      "departureAirport": "AMS",
+      "arrivalAirport": "FRA",
+      "airline": "Turkish Airlines",
+      "departureTime": "2024-01-17T21:00:00",
+      "arrivalTime": "2024-01-17T23:30:00",
+      "price": 200.0,
+      "duration": 2.5
+    },
+    {
+      "id": "FL001",
+      "departureAirport": "AMS",
+      "arrivalAirport": "FRA",
+      "airline": "Air France",
+      "departureTime": "2024-01-17T08:00:00",
+      "arrivalTime": "2024-01-17T09:30:00",
+      "price": 200.0,
+      "duration": 1.5
     }
   ]
 }

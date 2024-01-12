@@ -1,0 +1,135 @@
+.flightResults {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    margin-top: 2rem;
+    background-color: white;
+    color: black;
+
+}
+
+.sortBy {
+    display: flex;
+    flex-direction: row;
+    align-self: flex-end;
+    margin-bottom: 1rem;
+}
+
+.sortByTitle {
+
+    font-size: .75rem;
+    color: gray;
+}
+
+.sortBy button {
+    font-size: .5rem;
+    cursor: pointer;
+    padding: 0.2rem;
+    border: 1px solid tomato;
+    background-color: tomato;
+    color: white;
+}
+
+
+.flight {
+    display: flex;
+    width: 100%;
+    flex-direction: row;
+    align-items: center;
+    background-color: white;
+    padding: 1rem;
+    font-family: 'Roboto', sans-serif;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    margin-bottom: 1rem;
+
+}
+
+.airline {
+    display: flex;
+    flex-direction: column;
+    font-size: .5rem;
+    width: 3rem;
+
+}
+
+
+
+.departure {
+    display: flex;
+    flex-direction: column;
+    padding: 0 2rem;
+    align-items: center;
+    color: gray;
+
+
+}
+
+.departure time {
+    color: tomato;
+    font-weight: bold;
+
+
+}
+
+.duration {
+    display: flex;
+    flex-direction: row;
+}
+
+.duration p {
+    color: gray;
+    font-size: .5rem;
+    margin-top: 0.5rem;
+    padding: 0 2.2rem;
+    width: 9rem;
+}
+
+
+.arrival {
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+    align-items: center;
+    padding: 0 2rem;
+    color: gray;
+
+}
+
+
+.arrival time {
+    color: tomato;
+    font-weight: bold;
+}
+
+
+
+.price {
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+    color: black;
+    border: 1px solid black;
+    align-items: center;
+    align-self: flex-end;
+}
+
+.price h6 {
+    background-color: tomato;
+    width: 100%;
+    color: white;
+    font-size: .5rem;
+    padding: 0 2rem;
+
+}
+
+.priceValue {
+    font-size: 1rem;
+    font-weight: bold;
+    padding: 0 1rem;
+
+}
+
+.perPassenger {
+    font-size: .5rem;
+}

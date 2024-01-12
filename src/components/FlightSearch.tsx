@@ -1,5 +1,6 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import styles from "./FlightSearch.module.css";
+import FlightList from "./FlightList";
 
 const currentTime = new Date().toISOString().split("T")[0];
 
@@ -11,6 +12,7 @@ type flight = {
   departureTime: string;
   arrivalTime: string;
   price: number;
+  duration: number;
 };
 
 export default function FlightSearch() {
@@ -140,25 +142,7 @@ export default function FlightSearch() {
         </form>
       </div>
 
-      {flightData?.length > 0 ? (
-        <div className={styles.flightResults}>
-          <h2>Flight Results</h2>
-          <ul>
-            {flightData.map((flight) => (
-              <li key={flight.id}>
-                <p>Airline: {flight.airline}</p>
-                <p>Departure Airport: {flight.departureAirport}</p>
-                <p>Arrival Airport: {flight.arrivalAirport}</p>
-                <p>Departure Time: {flight.departureTime}</p>
-                <p>Arrival Time: {flight.arrivalTime}</p>
-                <p>Price: ${flight.price}</p>
-              </li>
-            ))}
-          </ul>
-        </div>
-      ) : (
-        <p>No flights found</p>
-      )}
+      <FlightList flights={flightData} />
     </main>
   );
 }
