@@ -2,9 +2,12 @@ import { useState } from "react";
 import styles from "./FlightSearch.module.css";
 import FlightList from "./FlightList";
 
+import AsyncSelect from "react-select/async";
+import AsyncSelectAirport from "./AsyncSelectAirport";
+
 const currentTime = new Date().toISOString().split("T")[0];
 
-type flight = {
+type Flight = {
   id: string;
   departureAirport: string;
   arrivalAirport: string;
@@ -15,9 +18,27 @@ type flight = {
   duration: number;
 };
 
+type Airport = {
+  code: string;
+  name: string;
+  city: string;
+};
+
 export default function FlightSearch() {
   const [isRoundTrip, setIsRoundTrip] = useState(false);
-  const [flightData, setFlightData] = useState<flight[]>([]);
+  const [flightData, setFlightData] = useState<Flight[]>([]);
+
+  const [selectedAirport, setSelectedAirport] = useState<Airport | null>(null);
+  const [airportOpt, setAirportOpt] = useState<Airport[]>([]);
+
+  const fetchAirportOptions = async (inputValue: string) => {
+    const response = await fetch(`/api/airports?query=${inputValue}`);
+    const data = await response.json();
+    console.log(data);
+
+    setAirportOpt(data);
+    return data;
+  };
 
   async function handleFlightSearch(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -27,18 +48,6 @@ export default function FlightSearch() {
     const departureDate = formData.get("departureDate");
     const returnDate = isRoundTrip ? formData.get("returnDate") : null;
 
-    console.log(
-      "data before query params:",
-      "departureAirport:",
-      departureAirport,
-      "arrivalAirport:",
-      arrivalAirport,
-      "departureDate:",
-      departureDate,
-      "returnDate:",
-      returnDate
-    );
-
     const queryParams = new URLSearchParams({
       departureAirport: departureAirport as string,
       arrivalAirport: arrivalAirport as string,
@@ -46,19 +55,19 @@ export default function FlightSearch() {
       returnDate: returnDate as string,
     });
 
-    console.log("queryParams:", queryParams);
-
     try {
       const response = await fetch(`/api/flights?${queryParams.toString()}`);
       const data = await response.json();
-      console.log("data:", data);
+
       setFlightData(data);
     } catch (error) {
       console.error("Error fetching flight data", error);
     }
   }
 
-  function handleAirportSearch() {}
+  function handleAirportSearch(selectedOption: any) {
+    setSelectedAirport(selectedOption ? selectedOption.data : null);
+  }
 
   function handleSearchType(event: React.ChangeEvent<HTMLInputElement>) {
     setIsRoundTrip(event.target.value === "roundTrip");
@@ -90,31 +99,35 @@ export default function FlightSearch() {
         </div>
         <form className={styles.searchForm} onSubmit={handleFlightSearch}>
           <div className={styles.inputGroup}>
-            <label className={styles.searchLabel} htmlFor="departureAirport">
-              From City/Airport
+            <label className={styles.searchLabel} htmlFor="arrivalAirport">
+              From City/Airport:
             </label>
-            <input
-              className={styles.searchInput}
-              type="text"
+            <AsyncSelectAirport
+              placeholder="From City/Airport"
+              loadOptions={fetchAirportOptions}
+              onChange={handleAirportSearch}
               name="departureAirport"
             />
           </div>
+
           <div className={styles.inputGroup}>
             <label className={styles.searchLabel} htmlFor="arrivalAirport">
               To City/Airport:
             </label>
-            <input
-              className={styles.searchInput}
-              type="text"
+            <AsyncSelectAirport
+              placeholder="To City/Airport"
+              loadOptions={fetchAirportOptions}
+              onChange={handleAirportSearch}
               name="arrivalAirport"
             />
           </div>
+
           <div className={styles.inputGroup}>
             <label className={styles.searchLabel} htmlFor="departureDate">
               Departure
             </label>
             <input
-              className={styles.searchInput}
+              className={styles.dateInput}
               type="date"
               name="departureDate"
               defaultValue={currentTime}
@@ -127,7 +140,7 @@ export default function FlightSearch() {
                 Return
               </label>
               <input
-                className={styles.searchInput}
+                className={styles.dateInput}
                 type="date"
                 name="returnDate"
                 min={currentTime}
