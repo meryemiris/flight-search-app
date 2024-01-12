@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import styles from "./FlightSearch.module.css";
 
@@ -33,7 +33,6 @@ export default function FlightSearch() {
       throw new Error("Failed to fetch data");
     }
     const airportData = await res.json();
-
     return airportData;
   };
 
@@ -56,7 +55,7 @@ export default function FlightSearch() {
     });
 
     try {
-      const response = await fetch(`/api/flights?${queryParams.toString()}`);
+      const response = await fetch(`/api/flights?${queryParams}`);
       const data = await response.json();
 
       if (data.length === 0) {
@@ -75,7 +74,6 @@ export default function FlightSearch() {
 
   function handleSearchType(event: React.ChangeEvent<HTMLInputElement>) {
     setIsRoundTrip(event.target.value === "roundTrip");
-    console.log("from radio buttons:", event.target.value);
   }
 
   return (
@@ -115,6 +113,7 @@ export default function FlightSearch() {
         flights={flightData}
         errorMessage={errorMessage}
         loading={loading}
+        setFlightData={setFlightData}
       />
     </main>
   );
