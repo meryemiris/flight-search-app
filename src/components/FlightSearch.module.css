@@ -1,10 +1,12 @@
 .main {
     display: flex;
     width: fit-content;
+    height: 100%;
     flex-direction: column;
     align-items: center;
     padding: 2rem;
     background-color: #023047;
+    overflow: hidden;
 
 
 }
@@ -43,8 +45,10 @@
 .inputGroup {
     margin-right: 1rem;
     padding: 0.5rem;
-    background-color: #ced4da;
-    box-shadow: 0 0 0 1px #ced4da;
+    background-color: inherit;
+
+    box-shadow: 0 4px 1px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+
 
 }
 
@@ -54,19 +58,20 @@
 }
 
 .searchInput {
-    color: black;
-    font-size: 0.75rem;
+    width: 8rem;
+    font-size: 0.5rem;
+}
+
+
+
+.dateInput {
     background-color: inherit;
     border: none;
-    padding-bottom: 0.5rem;
-
-}
-
-.searchInput::-webkit-calendar-picker-indicator {
-    cursor: pointer;
     color-scheme: light;
-
+    cursor: pointer;
 }
+
+
 
 .searchButton {
     cursor: pointer;
@@ -75,6 +80,8 @@
     border: none;
     padding: 0.5rem;
     height: 100%;
+    box-shadow: 0 4px 1px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+
 
 
 }

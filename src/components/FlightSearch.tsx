@@ -2,8 +2,7 @@ import { useState } from "react";
 import styles from "./FlightSearch.module.css";
 import FlightList from "./FlightList";
 
-import AsyncSelect from "react-select/async";
-import AsyncSelectAirport from "./AsyncSelectAirport";
+import SelectAirport from "./SelectAirport";
 
 const currentTime = new Date().toISOString().split("T")[0];
 
@@ -32,6 +31,9 @@ export default function FlightSearch() {
   const [airportOpt, setAirportOpt] = useState<Airport[]>([]);
 
   const fetchAirportOptions = async (inputValue: string) => {
+    if (inputValue.trim() === "") {
+      return [];
+    }
     const response = await fetch(`/api/airports?query=${inputValue}`);
     const data = await response.json();
     console.log(data);
@@ -80,6 +82,7 @@ export default function FlightSearch() {
       <div className={styles.flightSearch}>
         <div className={styles.searchType}>
           <input
+            id="oneWay"
             type="radio"
             name="searchType"
             value="oneWay"
@@ -89,6 +92,7 @@ export default function FlightSearch() {
           <label htmlFor="oneWay">one way</label>
 
           <input
+            id="roundTrip"
             type="radio"
             name="searchType"
             value="roundTrip"
@@ -98,35 +102,26 @@ export default function FlightSearch() {
           <label htmlFor="roundTrip">round trip</label>
         </div>
         <form className={styles.searchForm} onSubmit={handleFlightSearch}>
-          <div className={styles.inputGroup}>
-            <label className={styles.searchLabel} htmlFor="arrivalAirport">
-              From City/Airport:
-            </label>
-            <AsyncSelectAirport
-              placeholder="From City/Airport"
-              loadOptions={fetchAirportOptions}
-              onChange={handleAirportSearch}
-              name="departureAirport"
-            />
-          </div>
+          <SelectAirport
+            label="From City/Airport"
+            loadOptions={fetchAirportOptions}
+            onChange={handleAirportSearch}
+            name="departureAirport"
+          />
 
-          <div className={styles.inputGroup}>
-            <label className={styles.searchLabel} htmlFor="arrivalAirport">
-              To City/Airport:
-            </label>
-            <AsyncSelectAirport
-              placeholder="To City/Airport"
-              loadOptions={fetchAirportOptions}
-              onChange={handleAirportSearch}
-              name="arrivalAirport"
-            />
-          </div>
+          <SelectAirport
+            label="To City/Airport"
+            loadOptions={fetchAirportOptions}
+            onChange={handleAirportSearch}
+            name="arrivalAirport"
+          />
 
           <div className={styles.inputGroup}>
             <label className={styles.searchLabel} htmlFor="departureDate">
               Departure
             </label>
             <input
+              id="departureDate"
               className={styles.dateInput}
               type="date"
               name="departureDate"
@@ -140,6 +135,7 @@ export default function FlightSearch() {
                 Return
               </label>
               <input
+                id="returnDate"
                 className={styles.dateInput}
                 type="date"
                 name="returnDate"
