@@ -3,12 +3,12 @@ import styles from "./SelectAirport.module.css";
 
 type Props = {
   loadOptions: (value: string) => Promise<any>;
-  onChange: (value: any) => void;
+
   name: string;
   label: string;
 };
 
-const SelectAirport = ({ loadOptions, onChange, name, label }: Props) => {
+const SelectAirport = ({ loadOptions, name, label }: Props) => {
   return (
     <div className={styles.inputGroup}>
       <p className={styles.searchLabel}>{label}</p>
@@ -26,7 +26,6 @@ const SelectAirport = ({ loadOptions, onChange, name, label }: Props) => {
         cacheOptions
         defaultOptions
         loadOptions={(inputValue) => loadOptions(inputValue)}
-        onChange={onChange}
         name={name}
         placeholder=""
       />

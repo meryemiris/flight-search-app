@@ -5,14 +5,12 @@ import SelectAirport from "./SelectAirport";
 const currentTime = new Date().toISOString().split("T")[0];
 
 type Props = {
-  handleAirportSearch: (selectedOption: any) => void;
   handleFlightSearch: (event: FormEvent<HTMLFormElement>) => Promise<void>;
   fetchAirportOptions: (inputValue: string) => Promise<any>;
   isRoundTrip: boolean;
 };
 
 export default function SearchForm({
-  handleAirportSearch,
   handleFlightSearch,
   fetchAirportOptions,
   isRoundTrip,
@@ -22,14 +20,12 @@ export default function SearchForm({
       <SelectAirport
         label="From City/Airport"
         loadOptions={fetchAirportOptions}
-        onChange={handleAirportSearch}
         name="departureAirport"
       />
 
       <SelectAirport
         label="To City/Airport"
         loadOptions={fetchAirportOptions}
-        onChange={handleAirportSearch}
         name="arrivalAirport"
       />
 
@@ -42,7 +38,7 @@ export default function SearchForm({
           className={styles.dateInput}
           type="date"
           name="departureDate"
-          defaultValue={currentTime}
+          defaultValue="departure"
           min={currentTime}
         />
       </div>
@@ -57,7 +53,7 @@ export default function SearchForm({
             type="date"
             name="returnDate"
             min={currentTime}
-            defaultValue={currentTime}
+            defaultValue="return"
           />
         </div>
       )}

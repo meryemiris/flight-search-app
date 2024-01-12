@@ -180,16 +180,7 @@
       "price": 250.0,
       "duration": 1.5
     },
-    {
-      "id": "FL019",
-      "departureAirport": "JFK",
-      "arrivalAirport": "LAX",
-      "airline": "Delta Air Lines",
-      "departureTime": "2024-01-30T09:00:00",
-      "arrivalTime": "2024-01-30T11:00:00",
-      "price": 400.0,
-      "duration": 2.0
-    },
+
     {
       "id": "FL020",
       "departureAirport": "SFO",
@@ -219,6 +210,16 @@
       "arrivalTime": "2024-01-17T09:30:00",
       "price": 200.0,
       "duration": 1.5
+    },
+    {
+      "id": "FL0023",
+      "departureAirport": "IST",
+      "arrivalAirport": "FRA",
+      "airline": "Lufthansa",
+      "departureTime": "2024-01-17T01:30:00",
+      "arrivalTime": "2024-01-17T05:30:00",
+      "price": 200.0,
+      "duration": 4.0
     }
   ]
 }

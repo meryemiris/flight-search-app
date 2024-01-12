@@ -1,9 +1,9 @@
 import { useState } from "react";
-import styles from "./FlightSearch.module.css";
-import FlightList from "./FlightList";
 
+import styles from "./FlightSearch.module.css";
+
+import FlightList from "./FlightList";
 import SearchForm from "./SearchForm";
-import { Airport } from "@/pages/api/airports";
 
 type Flight = {
   id: string;
@@ -19,24 +19,29 @@ type Flight = {
 export default function FlightSearch() {
   const [isRoundTrip, setIsRoundTrip] = useState(false);
   const [flightData, setFlightData] = useState<Flight[]>([]);
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
+  const [loading, setLoading] = useState(false);
 
-  const [selectedAirport, setSelectedAirport] = useState<Airport | null>(null);
-  const [airportOpt, setAirportOpt] = useState<Airport[]>([]);
-
-  const fetchAirportOptions = async (inputValue: string) => {
-    if (inputValue.trim() === "") {
+  const fetchAirportOptions = async (val: string) => {
+    if (val.trim() === "") {
       return [];
     }
-    const response = await fetch(`/api/airports?query=${inputValue}`);
-    const data = await response.json();
-    console.log(data);
 
-    setAirportOpt(data);
-    return data;
+    const res = await fetch(`/api/airports?query=${val}`);
+
+    if (!res.ok) {
+      throw new Error("Failed to fetch data");
+    }
+    const airportData = await res.json();
+
+    return airportData;
   };
 
   async function handleFlightSearch(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
+    setErrorMessage(null);
+    setLoading(true);
+
     const formData = new FormData(event.currentTarget);
     const departureAirport = formData.get("departureAirport");
     const arrivalAirport = formData.get("arrivalAirport");
@@ -54,14 +59,18 @@ export default function FlightSearch() {
       const response = await fetch(`/api/flights?${queryParams.toString()}`);
       const data = await response.json();
 
-      setFlightData(data);
+      if (data.length === 0) {
+        setErrorMessage(
+          "Oops! No flights found for the selected criteria. Please try again with different options."
+        );
+      } else {
+        setFlightData(data);
+      }
     } catch (error) {
-      console.error("Error fetching flight data", error);
+      setErrorMessage("Oops! Something went wrong. Please try again later.");
+    } finally {
+      setLoading(false);
     }
-  }
-
-  function handleAirportSearch(selectedOption: any) {
-    setSelectedAirport(selectedOption ? selectedOption.data : null);
   }
 
   function handleSearchType(event: React.ChangeEvent<HTMLInputElement>) {
@@ -99,11 +108,14 @@ export default function FlightSearch() {
           handleFlightSearch={handleFlightSearch}
           isRoundTrip={isRoundTrip}
           fetchAirportOptions={fetchAirportOptions}
-          handleAirportSearch={handleAirportSearch}
         />
       </div>
 
-      <FlightList flights={flightData} />
+      <FlightList
+        flights={flightData}
+        errorMessage={errorMessage}
+        loading={loading}
+      />
     </main>
   );
 }
