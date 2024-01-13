@@ -148,12 +148,12 @@ export default function FlightSearch() {
         </main>
       </div>
 
-      {/* <FlightList
+      <FlightList
         flights={flightData}
         errorMessage={errorMessage}
         loading={loading}
         setSortBy={setSortBy}
-      /> */}
+      />
     </>
   );
 }

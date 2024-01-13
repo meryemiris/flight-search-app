@@ -1,10 +1,33 @@
+.navbar {
+    position: sticky;
+    top: 0;
+    background-color: #14213d;
+    height: 3rem;
+    padding: 1rem;
+    z-index: 1000;
+}
+
+
 .header {
-    background-image: url('/sky.svg');
-    background-size: auto;
+    display: flex;
+    justify-content: center;
+    background-image: url('/giza.svg');
+    background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
-    height: 15rem;
+    height: 12rem;
     width: 100%;
+}
 
 
+
+.navbar p {
+    color: white;
+    font-size: 0.75rem;
+}
+
+.header h1 {
+    color: #14213d;
+    font-weight: 400;
+    align-self: center;
 }

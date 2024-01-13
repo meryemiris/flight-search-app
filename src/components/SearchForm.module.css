@@ -27,6 +27,8 @@
     border: none;
     cursor: pointer;
     font-size: 1rem;
+    outline: none;
+
 
 }
 
@@ -34,12 +36,17 @@
     cursor: pointer;
     filter: invert(50%);
     font-size: 1.5rem;
+
+
+
 }
 
 
 
 .searchButton:hover {
     background-color: #ff9800;
+    transition: 0.3s;
+
 }
 
 .searchButton:active {
@@ -57,23 +64,30 @@
     background-color: #ffb703;
     border: none;
     padding: 0.5rem;
-    padding-bottom: 0;
-    height: 100%;
-    color: white;
+
+
     box-shadow: 0 4px 1px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 
 }
 
 .changeIcon {
+    position: absolute;
+    left: 12rem;
     font-size: 2.5rem;
+    margin-left: 5px;
     color: #ffb703;
     cursor: pointer;
+    background-color: white;
+    border-radius: 50%;
+
 
 
 }
 
 .changeIcon:hover {
     color: #ff9800;
+    transition: 0.3s;
+
 }
 
 .changeIcon:active {
@@ -81,7 +95,6 @@
 }
 
 .airplaneIcon {
-    font-size: 2rem;
-
+    font-size: 1.5rem;
 
 }

@@ -10,14 +10,15 @@ export default function Home() {
         <meta name="description" content="explore the world" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </Head>
+      <div className={styles.navbar}>
+        <p>BEYOND HORIZONS</p>
+      </div>
       <header className={styles.header}>
-        <h1>BEYOND HORIZONS</h1>
-        <h2>Choose Where to Explore!</h2>
+        <h1>Choose Where to Explore!</h1>
       </header>
       <main>
         <FlightSearch />
       </main>
-      <footer className={styles.footer}></footer>
     </>
   );
 }
