@@ -4,7 +4,6 @@ import styles from "./FlightSearch.module.css";
 
 import FlightList from "./FlightList";
 import SearchForm from "./SearchForm";
-import Image from "next/image";
 
 type Flight = {
   id: string;
@@ -19,25 +18,14 @@ type Flight = {
 
 export default function FlightSearch() {
   const [isRoundTrip, setIsRoundTrip] = useState(false);
+
   const [flightData, setFlightData] = useState<Flight[]>([]);
+
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
+
   const [sortBy, setSortBy] = useState<string>("price");
   const queryRef = useRef<URLSearchParams | null>(null);
-
-  const fetchAirportOptions = async (val: string) => {
-    if (val.trim() === "") {
-      return [];
-    }
-
-    const res = await fetch(`/api/airports?query=${val}`);
-
-    if (!res.ok) {
-      throw new Error("Failed to fetch data");
-    }
-    const airportData = await res.json();
-    return airportData;
-  };
 
   async function handleFlightSearch(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -143,7 +131,6 @@ export default function FlightSearch() {
           <SearchForm
             handleFlightSearch={handleFlightSearch}
             isRoundTrip={isRoundTrip}
-            fetchAirportOptions={fetchAirportOptions}
           />
         </main>
       </div>

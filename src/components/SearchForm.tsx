@@ -1,4 +1,4 @@
-import { FormEvent } from "react";
+import { FormEvent, useState } from "react";
 import styles from "./SearchForm.module.css";
 import SelectAirport from "./SelectAirport";
 import { MdChangeCircle } from "react-icons/md";
@@ -8,29 +8,48 @@ const currentTime = new Date().toISOString().split("T")[0];
 
 type Props = {
   handleFlightSearch: (event: FormEvent<HTMLFormElement>) => Promise<void>;
-  fetchAirportOptions: (inputValue: string) => Promise<any>;
   isRoundTrip: boolean;
 };
 
-export default function SearchForm({
-  handleFlightSearch,
-  fetchAirportOptions,
-  isRoundTrip,
-}: Props) {
+export type Airport = {
+  value: string;
+  label: string;
+  data: {
+    code: string;
+    name: string;
+    city: string;
+  };
+};
+
+export default function SearchForm({ handleFlightSearch, isRoundTrip }: Props) {
+  const [fromAirport, setFromAirport] = useState<Airport | null>(null);
+  const [toAirport, setToAirport] = useState<Airport | null>(null);
+
+  const handleSwitchAirport = () => {
+    const from = fromAirport;
+    const to = toAirport;
+    setFromAirport(to);
+    setToAirport(from);
+  };
+
   return (
     <form className={styles.searchForm} onSubmit={handleFlightSearch}>
       <SelectAirport
         label="From City/Airport"
-        loadOptions={fetchAirportOptions}
         name="departureAirport"
+        value={fromAirport}
+        onChange={setFromAirport}
       />
 
-      <MdChangeCircle className={styles.changeIcon} />
+      <button className={styles.changeButton} onClick={handleSwitchAirport}>
+        <MdChangeCircle className={styles.changeIcon} />
+      </button>
 
       <SelectAirport
         label="To City/Airport"
-        loadOptions={fetchAirportOptions}
         name="arrivalAirport"
+        value={toAirport}
+        onChange={setToAirport}
       />
 
       <div className={styles.inputGroup}>

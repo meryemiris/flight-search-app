@@ -69,11 +69,18 @@
 
 }
 
-.changeIcon {
+.changeButton {
     position: absolute;
     left: 12rem;
+    margin-left: 4px;
+    margin-top: 6px;
+
+    background-color: inherit;
+    border: none;
+}
+
+.changeIcon {
     font-size: 2.5rem;
-    margin-left: 5px;
     color: #ffb703;
     cursor: pointer;
     background-color: white;

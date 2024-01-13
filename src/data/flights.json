@@ -220,6 +220,16 @@
       "arrivalTime": "2024-01-17T05:30:00",
       "price": 300.0,
       "duration": 4.0
+    },
+    {
+      "id": "FL0023",
+      "departureAirport": "FRA",
+      "arrivalAirport": "AMS",
+      "airline": "Lufthansa",
+      "departureTime": "2024-01-17T01:30:00",
+      "arrivalTime": "2024-01-17T05:30:00",
+      "price": 300.0,
+      "duration": 4.0
     }
   ]
 }

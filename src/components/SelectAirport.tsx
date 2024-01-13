@@ -1,14 +1,30 @@
 import AsyncSelect from "react-select/async";
 import styles from "./SelectAirport.module.css";
+import { useState } from "react";
+import { Airport } from "./SearchForm";
 
-type Props = {
-  loadOptions: (value: string) => Promise<any>;
+const fetchAirportOptions = async (val: string) => {
+  if (val.trim() === "") {
+    return [];
+  }
 
-  name: string;
-  label: string;
+  const res = await fetch(`/api/airports?query=${val}`);
+
+  if (!res.ok) {
+    throw new Error("Failed to fetch data");
+  }
+  const airportData = (await res.json()) as Airport[];
+  return airportData;
 };
 
-const SelectAirport = ({ loadOptions, name, label }: Props) => {
+type Props = {
+  name: string;
+  label: string;
+  value: Airport | null;
+  onChange: (value: Airport | null) => void;
+};
+
+const SelectAirport = ({ name, label, value, onChange }: Props) => {
   return (
     <div className={styles.inputGroup}>
       <p className={styles.searchLabel}>{label}</p>
@@ -23,11 +39,14 @@ const SelectAirport = ({ loadOptions, name, label }: Props) => {
         }}
         className={styles.searchInput}
         isClearable
+        isSearchable
         cacheOptions
         defaultOptions
-        loadOptions={(inputValue) => loadOptions(inputValue)}
+        loadOptions={(inputValue) => fetchAirportOptions(inputValue)}
         name={name}
         placeholder=""
+        value={value}
+        onChange={onChange}
       />
     </div>
   );
