@@ -27,7 +27,7 @@
 }
 
 .sortBy button:hover {
-    color: tomato;
+    color: #ff9800;
     transition: 0.3s;
 }
 
@@ -68,7 +68,7 @@
 }
 
 .departure time {
-    color: tomato;
+    color: #14213d;
     font-weight: bold;
 
 
@@ -80,7 +80,7 @@
 }
 
 .duration p {
-    color: gray;
+    color: #8d99ae;
     font-size: 0.75rem;
     margin-top: 0.5rem;
     align-self: center;
@@ -92,16 +92,15 @@
 .arrival {
     display: flex;
     flex-direction: column;
-    background-color: white;
     align-items: center;
     padding: 0 2rem;
-    color: gray;
+    color: #8d99ae;
 
 }
 
 
 .arrival time {
-    color: tomato;
+    color: #14213d;
     font-weight: bold;
 }
 
@@ -110,10 +109,9 @@
 .price {
     display: flex;
     flex-direction: column;
-    background-color: white;
-    color: black;
-    border: 1px solid tomato;
-    width: 10rem;
+    color: #14213d;
+
+    /* width: 10rem; */
     padding: 0.5rem;
     align-items: center;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
@@ -121,11 +119,8 @@
 }
 
 .price h6 {
-    background-color: tomato;
-    width: 100%;
-    color: white;
-    padding: 0rem 2rem;
-
+    background-color: #ffb703;
+    padding: 0.1rem 1rem;
 }
 
 .priceValue {
