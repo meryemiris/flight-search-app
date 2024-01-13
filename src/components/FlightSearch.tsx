@@ -13,10 +13,10 @@ import { AirportData, FlightData } from "@/types";
 export default function FlightSearch() {
   const [isRoundTrip, setIsRoundTrip] = useState(false);
   const [departureAirport, setDepartureAirport] = useState<AirportData | null>(
-    null
+    null,
   );
   const [arrivalAirport, setArrivalAirport] = useState<AirportData | null>(
-    null
+    null,
   );
   const [flightData, setFlightData] = useState<FlightData[]>([]);
 
@@ -101,7 +101,7 @@ export default function FlightSearch() {
 
       if (data.length === 0) {
         setErrorMessage(
-          "Oops! No flights found for the selected criteria. Please try again with different options."
+          "Oops! No flights found for the selected criteria. Please try again with different options.",
         );
       } else {
         setFlightData(data);
@@ -118,20 +118,20 @@ export default function FlightSearch() {
       const getSortedFlights = async () => {
         try {
           const response = await fetch(
-            `/api/flights?${queryRef.current}&sortBy=${sortBy}`
+            `/api/flights?${queryRef.current}&sortBy=${sortBy}`,
           );
           const data = await response.json();
 
           if (data.length === 0) {
             setErrorMessage(
-              "Oops! No flights found for the selected criteria. Please try again with different options."
+              "Oops! No flights found for the selected criteria. Please try again with different options.",
             );
           } else {
             setFlightData(data);
           }
         } catch (error) {
           setErrorMessage(
-            "Oops! Something went wrong. Please try again later."
+            "Oops! Something went wrong. Please try again later.",
           );
         } finally {
           setLoading(false);

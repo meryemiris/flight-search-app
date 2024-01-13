@@ -92,7 +92,7 @@ const FlightList: React.FC<FlightListProps> = ({
                     <p className={styles.priceValue}> ${price}</p>
                   </div>
                 </li>
-              )
+              ),
             )}
           </ul>
         )

@@ -10,7 +10,7 @@ type Airport = {
 
 export default function handler(
   req: NextApiRequest,
-  res: NextApiResponse<AirportData[]>
+  res: NextApiResponse<AirportData[]>,
 ) {
   const airports: Airport[] = airportsData.airports;
   const query = req.query.query as string;
@@ -19,7 +19,7 @@ export default function handler(
     (airport) =>
       airport.code.toLowerCase().includes(query.toLowerCase()) ||
       airport.name.toLowerCase().includes(query.toLowerCase()) ||
-      airport.city.toLowerCase().includes(query.toLowerCase())
+      airport.city.toLowerCase().includes(query.toLowerCase()),
   );
 
   const asyncSelectOptions: AirportData[] = filteredAirports.map((airport) => ({

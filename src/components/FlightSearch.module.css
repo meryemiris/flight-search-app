@@ -1,55 +1,48 @@
 .flightSearch {
-    display: flex;
-    justify-content: center;
-    width: 100vw;
-
+  display: flex;
+  justify-content: center;
+  width: 100vw;
 }
 
 .searchBar {
-    position: absolute;
-    top: 12rem;
-    display: flex;
-    flex-direction: column;
-    background-color: rgba(255, 255, 255, 0.8);
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-
+  position: absolute;
+  top: 12rem;
+  display: flex;
+  flex-direction: column;
+  background-color: rgba(255, 255, 255, 0.8);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
 }
-
 
 .flightTypeContainer {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    padding: 0.5rem;
-    width: 100%;
-    justify-content: center;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 0.5rem;
+  width: 100%;
+  justify-content: center;
 }
 
-
 .flightTypeContainer input {
-    cursor: pointer;
+  cursor: pointer;
 }
 
 .flightTypeContainer input[type="radio"] {
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    appearance: none;
-    border-radius: 50%;
-    width: 0.75rem;
-    height: 0.75rem;
-    border: 2px solid #023047;
-    transition: border-color 0.3s ease;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  border-radius: 50%;
+  width: 0.75rem;
+  height: 0.75rem;
+  border: 2px solid #023047;
+  transition: border-color 0.3s ease;
 }
-
 
 .flightTypeContainer input[type="radio"]:checked {
-    background-color: #023047;
+  background-color: #023047;
 }
 
-
 .flightTypeContainer label {
-    cursor: pointer;
-    margin-left: 0.2rem;
-    padding-right: 1rem;
-
+  cursor: pointer;
+  margin-left: 0.2rem;
+  padding-right: 1rem;
 }

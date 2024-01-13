@@ -1,33 +1,29 @@
 .navbar {
-    position: sticky;
-    top: 0;
-    background-color: #14213d;
-    height: 3rem;
-    padding: 1rem;
-
+  position: sticky;
+  top: 0;
+  background-color: #14213d;
+  height: 3rem;
+  padding: 1rem;
 }
-
 
 .header {
-    display: flex;
-    justify-content: center;
-    background-image: url('/giza.jpg');
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center;
-    height: 12rem;
-    width: 100%;
+  display: flex;
+  justify-content: center;
+  background-image: url("/giza.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  height: 12rem;
+  width: 100%;
 }
 
-
-
 .navbar p {
-    color: white;
-    font-size: 0.75rem;
+  color: white;
+  font-size: 0.75rem;
 }
 
 .header h1 {
-    color: #14213d;
-    font-weight: 400;
-    align-self: center;
+  color: #14213d;
+  font-weight: 400;
+  align-self: center;
 }

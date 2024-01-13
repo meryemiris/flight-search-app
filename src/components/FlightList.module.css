@@ -1,149 +1,149 @@
 .flightResults {
-    position: absolute;
-    top: 20rem;
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding-top: 1rem;
+  position: absolute;
+  top: 20rem;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 1rem;
 }
 
 .sortBy {
-    display: flex;
-    flex-direction: row;
-    justify-content: flex-end;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
 
 }
 
 .sortBy button {
-    font-size: 0.8rem;
-    cursor: pointer;
-    padding: 0.5rem;
-    border: 1px solid white;
-    background-color: inherit;
-    box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.2), 0 6px 2px 0 rgba(0, 0, 0, 0.19);
-    margin-left: 0.5rem;
+  font-size: 0.8rem;
+  cursor: pointer;
+  padding: 0.5rem;
+  border: 1px solid white;
+  background-color: inherit;
+  box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.2), 0 6px 2px 0 rgba(0, 0, 0, 0.19);
+  margin-left: 0.5rem;
 
 }
 
 .sortBy button:hover {
-    color: #ff9800;
-    transition: 0.3s;
+  color: #ff9800;
+  transition: 0.3s;
 }
 
 .sortBy button:active {
-    color: black;
+  color: black;
 }
 
 
 .flight {
-    display: flex;
-    width: 100%;
-    flex-direction: row;
-    align-items: center;
-    background-color: white;
-    padding: 1rem;
-    box-shadow: 0 4px 2px 0 rgba(0, 0, 0, 0.2), 0 2px 20px 0 rgba(0, 0, 0, 0.19);
-    margin: 1rem 0 1rem;
+  display: flex;
+  width: 100%;
+  flex-direction: row;
+  align-items: center;
+  background-color: white;
+  padding: 1rem;
+  box-shadow: 0 4px 2px 0 rgba(0, 0, 0, 0.2), 0 2px 20px 0 rgba(0, 0, 0, 0.19);
+  margin: 1rem 0 1rem;
 }
 
 .airline {
-    display: flex;
-    flex-direction: column;
-    font-size: 0.75rem;
-    width: 2.5rem;
-    color: gray;
+  display: flex;
+  flex-direction: column;
+  font-size: 0.75rem;
+  width: 2.5rem;
+  color: gray;
 }
 
 
 
 .departure {
-    display: flex;
-    flex-direction: column;
-    padding: 0 2rem;
-    align-items: center;
-    color: gray;
+  display: flex;
+  flex-direction: column;
+  padding: 0 2rem;
+  align-items: center;
+  color: gray;
 
 
 }
 
 .departure time {
-    color: #14213d;
-    font-weight: bold;
+  color: #14213d;
+  font-weight: bold;
 
 
 }
 
 .duration {
-    display: flex;
-    align-items: flex-end;
+  display: flex;
+  align-items: flex-end;
 }
 
 .duration p {
-    color: #8d99ae;
-    font-size: 0.75rem;
-    margin-top: 0.5rem;
-    align-self: center;
-    padding-left: 2.5rem;
-    width: 12rem;
+  color: #8d99ae;
+  font-size: 0.75rem;
+  margin-top: 0.5rem;
+  align-self: center;
+  padding-left: 2.5rem;
+  width: 12rem;
 }
 
 
 .arrival {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 0 2rem;
-    color: #8d99ae;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0 2rem;
+  color: #8d99ae;
 
 }
 
 
 .arrival time {
-    color: #14213d;
-    font-weight: bold;
+  color: #14213d;
+  font-weight: bold;
 }
 
 
 
 .price {
-    display: flex;
-    flex-direction: column;
-    color: #14213d;
+  display: flex;
+  flex-direction: column;
+  color: #14213d;
 
-    /* width: 10rem; */
-    padding: 0.5rem;
-    align-items: center;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  /* width: 10rem; */
+  padding: 0.5rem;
+  align-items: center;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 
 }
 
 .price h6 {
-    background-color: #ffb703;
-    padding: 0.1rem 1rem;
+  background-color: #ffb703;
+  padding: 0.1rem 1rem;
 }
 
 .priceValue {
-    font-weight: bold;
-    padding: 0 1rem;
+  font-weight: bold;
+  padding: 0 1rem;
 
 }
 
 .perPassenger {
-    font-size: 0.75rem;
+  font-size: 0.75rem;
 }
 
 
 .error {
-    display: flex;
-    align-items: center;
-    padding: 1rem;
-    font-family: 'Roboto', sans-serif;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-    margin: 2rem 0;
+  display: flex;
+  align-items: center;
+  padding: 1rem;
+  font-family: 'Roboto', sans-serif;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  margin: 2rem 0;
 }
 
 
 .errorMessage {
-    color: tomato;
+  color: tomato;
 }

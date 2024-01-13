@@ -3,14 +3,11 @@
   --font-size-base: 1rem;
 }
 
-
 * {
   box-sizing: border-box;
   padding: 0;
   margin: 0;
 }
-
-
 
 html,
 body {

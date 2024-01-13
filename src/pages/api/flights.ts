@@ -19,7 +19,7 @@ type ErrorResponse = {
 const sortByProperty = (
   flights: FlightData[],
   property: keyof FlightData,
-  ascending: boolean = true
+  ascending: boolean = true,
 ): FlightData[] => {
   return flights.sort((a, b) => {
     if (ascending) {
@@ -32,7 +32,7 @@ const sortByProperty = (
 
 export default function handler(
   req: NextApiRequest,
-  res: NextApiResponse<FlightData[] | ErrorResponse>
+  res: NextApiResponse<FlightData[] | ErrorResponse>,
 ) {
   const {
     departureAirport,
