@@ -38,21 +38,25 @@ const FlightList: React.FC<FlightListProps> = ({
         ) : (
           flights.length > 0 && (
             <>
-              <div className={styles.sortBy}>
-                <button onClick={() => setSortBy("price")}>
-                  price <FaSort />
-                </button>
-                <button onClick={() => setSortBy("duration")}>
-                  duration <FaSort />
-                </button>
-                <button onClick={() => setSortBy("departureTime")}>
-                  departure time <FaSort />
-                </button>
-                <button onClick={() => setSortBy("arrivalTime")}>
-                  arrival time <FaSort />
-                </button>
-              </div>
               <ul>
+                <div className={styles.sortBy}>
+                  <button
+                    className={styles.sortByButton}
+                    onClick={() => setSortBy("departureTime")}
+                  >
+                    departure time <FaSort />
+                  </button>
+                  <button onClick={() => setSortBy("duration")}>
+                    duration <FaSort />
+                  </button>
+
+                  <button onClick={() => setSortBy("arrivalTime")}>
+                    arrival time <FaSort />
+                  </button>
+                  <button onClick={() => setSortBy("price")}>
+                    price <FaSort />
+                  </button>
+                </div>
                 {flights.map(
                   ({
                     id,

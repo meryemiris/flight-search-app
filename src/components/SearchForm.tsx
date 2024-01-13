@@ -1,6 +1,8 @@
 import { FormEvent } from "react";
 import styles from "./SearchForm.module.css";
 import SelectAirport from "./SelectAirport";
+import { MdChangeCircle } from "react-icons/md";
+import { IoIosAirplane } from "react-icons/io";
 
 const currentTime = new Date().toISOString().split("T")[0];
 
@@ -22,6 +24,8 @@ export default function SearchForm({
         loadOptions={fetchAirportOptions}
         name="departureAirport"
       />
+
+      <MdChangeCircle className={styles.changeIcon} />
 
       <SelectAirport
         label="To City/Airport"
@@ -60,6 +64,7 @@ export default function SearchForm({
 
       <button className={styles.searchButton} type="submit">
         Find Flights
+        <IoIosAirplane className={styles.airplaneIcon} />
       </button>
     </form>
   );

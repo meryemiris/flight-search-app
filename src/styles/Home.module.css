@@ -1,0 +1,10 @@
+.header {
+    background-image: url('/sky.svg');
+    background-size: auto;
+    background-repeat: no-repeat;
+    background-position: center;
+    height: 15rem;
+    width: 100%;
+
+
+}

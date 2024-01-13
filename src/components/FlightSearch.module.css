@@ -1,55 +1,67 @@
-.main {
-    display: flex;
-    width: fit-content;
-    height: 100%;
-    flex-direction: column;
-    align-items: center;
-    padding: 2rem;
-    background-color: #023047;
-    overflow: hidden;
-}
-
-.title {
-    font-size: 2rem;
-    color: white;
-    font-family: 'Courier New', Courier, monospace;
-}
-
-
 .flightSearch {
-    background-color: #f8f9fa;
-    color: black;
+    width: 100vw;
+
+
+}
+
+
+
+.header {
+    background-color: #023047;
     display: flex;
     flex-direction: column;
-    align-items: center;
-    margin-top: 1rem;
-    border-radius: 0.5rem
+    /* align-items: flex-start; */
+
+
+
 }
 
-.searchTitle {
+.header h2 {
     font-size: 1rem;
-    font-family: 'Courier New', Courier, monospace;
-    align-self: center;
+}
+
+.searchBar {
+    display: flex;
+    flex-direction: column;
+    margin-top: 7rem;
+
 }
 
 
-
-.searchType {
-    align-self: center;
+.flightTypeContainer {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
     padding: 0.5rem;
-    font-size: 0.75rem;
-
-
-
+    width: 100%;
+    justify-content: center;
 }
 
 
-.searchType input {
+.flightTypeContainer input {
     cursor: pointer;
 }
 
-.searchType label {
+.flightTypeContainer input[type="radio"] {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    border-radius: 50%;
+    width: 0.75rem;
+    height: 0.75rem;
+    border: 2px solid #023047;
+    transition: border-color 0.3s ease;
+}
+
+
+.flightTypeContainer input[type="radio"]:checked {
+    background-color: #023047;
+}
+
+
+.flightTypeContainer label {
+    cursor: pointer;
+    margin-left: 0.2rem;
     padding-right: 1rem;
-    padding-left: 0.1rem;
-    font-family: 'Roboto', sans-serif;
+
 }

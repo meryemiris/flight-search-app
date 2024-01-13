@@ -3,43 +3,85 @@
     display: flex;
     flex-direction: row;
     align-items: center;
-    padding: 0 1rem 1rem;
+    padding: 1rem;
 }
 
+
+
 .inputGroup {
-    margin-right: 1rem;
+    margin-left: 1rem;
     padding: 0.5rem;
     background-color: inherit;
     box-shadow: 0 4px 1px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
+
+.searchLabel {
+    font-size: 0.75rem;
+    display: block;
+}
+
 
 
 .dateInput {
     background-color: inherit;
     border: none;
-    color-scheme: light;
     cursor: pointer;
+    font-size: 1rem;
+
+}
+
+.dateInput::-webkit-calendar-picker-indicator {
+    cursor: pointer;
+    filter: invert(50%);
+    font-size: 1.5rem;
 }
 
 
-.searchLabel {
-    font-size: 0.5rem;
-    display: block;
+
+.searchButton:hover {
+    background-color: #ff9800;
 }
 
-.searchInput {
-    width: 8rem;
-    font-size: 0.5rem;
+.searchButton:active {
+    background-color: white;
 }
-
 
 .searchButton {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-left: 1rem;
     cursor: pointer;
-    font-size: 0.75rem;
+    font-size: 1rem;
     background-color: #ffb703;
     border: none;
     padding: 0.5rem;
+    padding-bottom: 0;
     height: 100%;
+    color: white;
     box-shadow: 0 4px 1px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+
+}
+
+.changeIcon {
+    font-size: 2.5rem;
+    color: #ffb703;
+    cursor: pointer;
+
+
+}
+
+.changeIcon:hover {
+    color: #ff9800;
+}
+
+.changeIcon:active {
+    color: white;
+}
+
+.airplaneIcon {
+    font-size: 2rem;
+
 
 }

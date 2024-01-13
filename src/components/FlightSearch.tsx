@@ -4,6 +4,7 @@ import styles from "./FlightSearch.module.css";
 
 import FlightList from "./FlightList";
 import SearchForm from "./SearchForm";
+import Image from "next/image";
 
 type Flight = {
   id: string;
@@ -114,44 +115,45 @@ export default function FlightSearch() {
   }
 
   return (
-    <main className={styles.main}>
-      <h1 className={styles.title}>Find your flight</h1>
+    <>
       <div className={styles.flightSearch}>
-        <div className={styles.searchType}>
-          <input
-            id="oneWay"
-            type="radio"
-            name="searchType"
-            value="oneWay"
-            checked={!isRoundTrip}
-            onChange={handleSearchType}
-          />
-          <label htmlFor="oneWay">one way</label>
+        <main className={styles.searchBar}>
+          <div className={styles.flightTypeContainer}>
+            <input
+              id="oneWay"
+              type="radio"
+              name="searchType"
+              value="oneWay"
+              checked={!isRoundTrip}
+              onChange={handleSearchType}
+            />
+            <label htmlFor="oneWay">one way</label>
 
-          <input
-            id="roundTrip"
-            type="radio"
-            name="searchType"
-            value="roundTrip"
-            checked={isRoundTrip}
-            onChange={handleSearchType}
-          />
-          <label htmlFor="roundTrip">round trip</label>
-        </div>
+            <input
+              id="roundTrip"
+              type="radio"
+              name="searchType"
+              value="roundTrip"
+              checked={isRoundTrip}
+              onChange={handleSearchType}
+            />
+            <label htmlFor="roundTrip">round trip</label>
+          </div>
 
-        <SearchForm
-          handleFlightSearch={handleFlightSearch}
-          isRoundTrip={isRoundTrip}
-          fetchAirportOptions={fetchAirportOptions}
-        />
+          <SearchForm
+            handleFlightSearch={handleFlightSearch}
+            isRoundTrip={isRoundTrip}
+            fetchAirportOptions={fetchAirportOptions}
+          />
+        </main>
       </div>
 
-      <FlightList
+      {/* <FlightList
         flights={flightData}
         errorMessage={errorMessage}
         loading={loading}
         setSortBy={setSortBy}
-      />
-    </main>
+      /> */}
+    </>
   );
 }
