@@ -42,11 +42,10 @@ export default function handler(
     sortBy,
   } = req.query;
 
-  //
-  // if (!departureAirport || !arrivalAirport || !departureDate) {
-  //   const errorResponse: ErrorResponse = { error: "Invalid parameters" };
-  //   return res.status(400).json(errorResponse);
-  // }
+  if (!departureAirport || !arrivalAirport || !departureDate) {
+    const errorResponse: ErrorResponse = { error: "Invalid parameters" };
+    return res.status(400).json(errorResponse);
+  }
 
   let flights: FlightData[] = flightsData.flights.filter((flight) => {
     return (
@@ -70,12 +69,16 @@ export default function handler(
 
   switch (sortBy) {
     case "price":
+      flights = sortByProperty(flights, sortBy);
+      break;
     case "duration":
       flights = sortByProperty(flights, sortBy);
       break;
     case "departureTime":
+      flights = sortByProperty(flights, sortBy);
+      break;
     case "arrivalTime":
-      flights = sortByProperty(flights, sortBy, false);
+      flights = sortByProperty(flights, sortBy);
       break;
     default:
       flights = sortByProperty(flights, "price");

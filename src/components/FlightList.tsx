@@ -1,7 +1,7 @@
-import { GiAirplaneArrival, GiAirplaneDeparture } from "react-icons/gi";
 import styles from "./FlightList.module.css";
+
+import { GiAirplaneArrival, GiAirplaneDeparture } from "react-icons/gi";
 import { FaSort } from "react-icons/fa";
-import { useEffect, useState } from "react";
 
 type Flight = {
   id: string;
@@ -18,40 +18,15 @@ type FlightListProps = {
   flights: Flight[];
   errorMessage: string | null;
   loading: boolean;
-  setFlightData: (flights: Flight[]) => void;
+  setSortBy: (sortBy: string) => void;
 };
 
 const FlightList: React.FC<FlightListProps> = ({
   flights,
   errorMessage,
   loading,
-  setFlightData,
+  setSortBy,
 }) => {
-  const [sortBy, setSortBy] = useState<string>("");
-  console.log("sortBy:", sortBy);
-
-  useEffect(() => {
-    async function fetchData() {
-      try {
-        const queryParams = new URLSearchParams({
-          sortBy,
-        });
-
-        const response = await fetch(`/api/flights?${queryParams}`);
-        const data = await response.json();
-        console.log("data:", data);
-
-        if (data.length > 0) {
-          setFlightData(data);
-        }
-      } catch (error) {
-        console.error(error);
-      }
-    }
-
-    fetchData();
-  }, [sortBy, setFlightData]);
-
   return (
     <>
       {loading && <p>Loading...</p>}

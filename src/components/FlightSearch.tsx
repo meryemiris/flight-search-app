@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 import styles from "./FlightSearch.module.css";
 
@@ -21,6 +21,8 @@ export default function FlightSearch() {
   const [flightData, setFlightData] = useState<Flight[]>([]);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
+  const [sortBy, setSortBy] = useState<string>("price");
+  const queryRef = useRef<URLSearchParams | null>(null);
 
   const fetchAirportOptions = async (val: string) => {
     if (val.trim() === "") {
@@ -54,9 +56,15 @@ export default function FlightSearch() {
       returnDate: returnDate as string,
     });
 
+    queryRef.current = queryParams;
+
     try {
       const response = await fetch(`/api/flights?${queryParams}`);
       const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error("Not ok response");
+      }
 
       if (data.length === 0) {
         setErrorMessage(
@@ -71,6 +79,35 @@ export default function FlightSearch() {
       setLoading(false);
     }
   }
+
+  useEffect(() => {
+    if (queryRef.current && sortBy) {
+      const getSortedFlights = async () => {
+        try {
+          const response = await fetch(
+            `/api/flights?${queryRef.current}&sortBy=${sortBy}`
+          );
+          const data = await response.json();
+
+          if (data.length === 0) {
+            setErrorMessage(
+              "Oops! No flights found for the selected criteria. Please try again with different options."
+            );
+          } else {
+            setFlightData(data);
+          }
+        } catch (error) {
+          setErrorMessage(
+            "Oops! Something went wrong. Please try again later."
+          );
+        } finally {
+          setLoading(false);
+        }
+      };
+
+      getSortedFlights();
+    }
+  }, [sortBy]);
 
   function handleSearchType(event: React.ChangeEvent<HTMLInputElement>) {
     setIsRoundTrip(event.target.value === "roundTrip");
@@ -113,7 +150,7 @@ export default function FlightSearch() {
         flights={flightData}
         errorMessage={errorMessage}
         loading={loading}
-        setFlightData={setFlightData}
+        setSortBy={setSortBy}
       />
     </main>
   );
