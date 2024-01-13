@@ -1,7 +1,7 @@
 import AsyncSelect from "react-select/async";
+import { components } from "react-select";
 import styles from "./SelectAirport.module.css";
-import { useState } from "react";
-import { Airport } from "./SearchForm";
+import { AirportData } from "../types";
 
 const fetchAirportOptions = async (val: string) => {
   if (val.trim() === "") {
@@ -13,15 +13,15 @@ const fetchAirportOptions = async (val: string) => {
   if (!res.ok) {
     throw new Error("Failed to fetch data");
   }
-  const airportData = (await res.json()) as Airport[];
+  const airportData = (await res.json()) as AirportData[];
   return airportData;
 };
 
 type Props = {
   name: string;
   label: string;
-  value: Airport | null;
-  onChange: (value: Airport | null) => void;
+  value: AirportData | null;
+  onChange: (value: AirportData | null) => void;
 };
 
 const SelectAirport = ({ name, label, value, onChange }: Props) => {
@@ -29,6 +29,14 @@ const SelectAirport = ({ name, label, value, onChange }: Props) => {
     <div className={styles.inputGroup}>
       <p className={styles.searchLabel}>{label}</p>
       <AsyncSelect
+        id={name}
+        instanceId={name}
+        // https://github.com/JedWatson/react-select/issues/5459#issuecomment-1875022105
+        components={{
+          Input: (props) => (
+            <components.Input {...props} aria-activedescendant={undefined} />
+          ),
+        }}
         styles={{
           indicatorsContainer: () => ({
             display: "none",

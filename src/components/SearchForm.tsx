@@ -3,6 +3,7 @@ import styles from "./SearchForm.module.css";
 import SelectAirport from "./SelectAirport";
 import { MdChangeCircle } from "react-icons/md";
 import { IoIosAirplane } from "react-icons/io";
+import { AirportData } from "@/types";
 
 const currentTime = new Date().toISOString().split("T")[0];
 
@@ -11,19 +12,9 @@ type Props = {
   isRoundTrip: boolean;
 };
 
-export type Airport = {
-  value: string;
-  label: string;
-  data: {
-    code: string;
-    name: string;
-    city: string;
-  };
-};
-
 export default function SearchForm({ handleFlightSearch, isRoundTrip }: Props) {
-  const [fromAirport, setFromAirport] = useState<Airport | null>(null);
-  const [toAirport, setToAirport] = useState<Airport | null>(null);
+  const [fromAirport, setFromAirport] = useState<AirportData | null>(null);
+  const [toAirport, setToAirport] = useState<AirportData | null>(null);
 
   const handleSwitchAirport = () => {
     const from = fromAirport;

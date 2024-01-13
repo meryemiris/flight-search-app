@@ -1,21 +1,16 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import airportsData from "../../data/airports.json";
+import { AirportData } from "@/types";
 
-export type Airport = {
+type Airport = {
   code: string;
   name: string;
   city: string;
 };
 
-type AsyncSelectOption = {
-  value: string;
-  label: string;
-  data: Airport;
-};
-
 export default function handler(
   req: NextApiRequest,
-  res: NextApiResponse<AsyncSelectOption[]>
+  res: NextApiResponse<AirportData[]>
 ) {
   const airports: Airport[] = airportsData.airports;
   const query = req.query.query as string;
@@ -27,13 +22,10 @@ export default function handler(
       airport.city.toLowerCase().includes(query.toLowerCase())
   );
 
-  const asyncSelectOptions: AsyncSelectOption[] = filteredAirports.map(
-    (airport) => ({
-      value: airport.code,
-      label: `${airport.city} (${airport.name}) - ${airport.code}`,
-      data: airport,
-    })
-  );
+  const asyncSelectOptions: AirportData[] = filteredAirports.map((airport) => ({
+    value: airport.code,
+    label: `${airport.city} (${airport.name}) - ${airport.code}`,
+  }));
 
   res.status(200).json(asyncSelectOptions);
 }

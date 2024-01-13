@@ -1,25 +1,24 @@
 import { useEffect, useRef, useState } from "react";
 
 import styles from "./FlightSearch.module.css";
-
+import searchFormStyles from "./SearchForm.module.css";
 import FlightList from "./FlightList";
-import SearchForm from "./SearchForm";
+import SelectAirport from "./SelectAirport";
+import { MdChangeCircle } from "react-icons/md";
+import { IoIosAirplane } from "react-icons/io";
+import { AirportData, FlightData } from "@/types";
 
-type Flight = {
-  id: string;
-  departureAirport: string;
-  arrivalAirport: string;
-  airline: string;
-  departureTime: string;
-  arrivalTime: string;
-  price: number;
-  duration: number;
-};
+// const currentTime = new Date().toISOString().split("T")[0];
 
 export default function FlightSearch() {
   const [isRoundTrip, setIsRoundTrip] = useState(false);
-
-  const [flightData, setFlightData] = useState<Flight[]>([]);
+  const [departureAirport, setDepartureAirport] = useState<AirportData | null>(
+    null
+  );
+  const [arrivalAirport, setArrivalAirport] = useState<AirportData | null>(
+    null
+  );
+  const [flightData, setFlightData] = useState<FlightData[]>([]);
 
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
@@ -29,14 +28,59 @@ export default function FlightSearch() {
 
   async function handleFlightSearch(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    setErrorMessage(null);
-    setLoading(true);
 
     const formData = new FormData(event.currentTarget);
     const departureAirport = formData.get("departureAirport");
     const arrivalAirport = formData.get("arrivalAirport");
-    const departureDate = formData.get("departureDate");
-    const returnDate = isRoundTrip ? formData.get("returnDate") : null;
+    const departureDate = formData.get("departureDate") as string | null; // 2024-01-17
+    const returnDate = isRoundTrip
+      ? (formData.get("returnDate") as string)
+      : null;
+
+    if (!departureAirport) {
+      setErrorMessage("Please select a departure airport.");
+      return;
+    }
+
+    if (!arrivalAirport) {
+      setErrorMessage("Please select an arrival airport.");
+      return;
+    }
+
+    if (departureAirport === arrivalAirport) {
+      setErrorMessage("Departure and arrival airports cannot be the same.");
+      return;
+    }
+
+    if (!departureDate) {
+      setErrorMessage("Please select a departure date.");
+      return;
+    }
+
+    if (isRoundTrip && !returnDate) {
+      setErrorMessage("Please select a return date.");
+      return;
+    }
+    if (
+      !departureAirport ||
+      !arrivalAirport ||
+      !departureDate ||
+      (isRoundTrip && !returnDate)
+    ) {
+      setErrorMessage("Please fill all the fields.");
+      return;
+    }
+
+    if (
+      isRoundTrip &&
+      returnDate &&
+      new Date(departureDate) > new Date(returnDate)
+    ) {
+      return setErrorMessage("Return date could not be before departure date.");
+    }
+
+    setErrorMessage(null);
+    setLoading(true);
 
     const queryParams = new URLSearchParams({
       departureAirport: departureAirport as string,
@@ -102,6 +146,15 @@ export default function FlightSearch() {
     setIsRoundTrip(event.target.value === "roundTrip");
   }
 
+  const handleSwitchAirport = () => {
+    const from = departureAirport;
+    const to = arrivalAirport;
+    setDepartureAirport(to);
+    setArrivalAirport(from);
+  };
+
+  const todaysDate = new Date().toISOString().split("T")[0];
+
   return (
     <>
       <div className={styles.flightSearch}>
@@ -128,10 +181,71 @@ export default function FlightSearch() {
             <label htmlFor="roundTrip">round trip</label>
           </div>
 
-          <SearchForm
-            handleFlightSearch={handleFlightSearch}
-            isRoundTrip={isRoundTrip}
-          />
+          <form
+            className={searchFormStyles.searchForm}
+            onSubmit={handleFlightSearch}
+          >
+            <SelectAirport
+              label="From City/Airport"
+              name="departureAirport"
+              value={departureAirport}
+              onChange={setDepartureAirport}
+            />
+
+            <button
+              className={searchFormStyles.changeButton}
+              onClick={handleSwitchAirport}
+              type="button"
+            >
+              <MdChangeCircle className={searchFormStyles.changeIcon} />
+            </button>
+
+            <SelectAirport
+              label="To City/Airport"
+              name="arrivalAirport"
+              value={arrivalAirport}
+              onChange={setArrivalAirport}
+            />
+
+            <div className={searchFormStyles.inputGroup}>
+              <label
+                className={searchFormStyles.searchLabel}
+                htmlFor="departureDate"
+              >
+                Departure
+              </label>
+              <input
+                id="departureDate"
+                className={searchFormStyles.dateInput}
+                type="date"
+                name="departureDate"
+                defaultValue={todaysDate}
+                min={todaysDate}
+              />
+            </div>
+            {isRoundTrip && (
+              <div className={searchFormStyles.inputGroup}>
+                <label
+                  className={searchFormStyles.searchLabel}
+                  htmlFor="returnDate"
+                >
+                  Return
+                </label>
+                <input
+                  id="returnDate"
+                  className={searchFormStyles.dateInput}
+                  type="date"
+                  name="returnDate"
+                  min={todaysDate}
+                />
+              </div>
+            )}
+
+            <button className={searchFormStyles.searchButton} type="submit">
+              Find Flights
+              <IoIosAirplane className={searchFormStyles.airplaneIcon} />
+            </button>
+          </form>
         </main>
       </div>
 
