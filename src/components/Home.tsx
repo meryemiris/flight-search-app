@@ -163,7 +163,7 @@ export default function Home() {
       />
 
       <div className={styles.flightResults}>
-        {!loading && flightData.length ? (
+        {!loading && !errorMessage && flightData.length ? (
           <SortButtons
             activeSortBy={activeSortBy}
             isAscending={isAscending}
