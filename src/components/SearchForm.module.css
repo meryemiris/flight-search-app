@@ -4,25 +4,17 @@
   flex-direction: row;
   align-items: center;
   padding: 1rem;
+
 }
-
-@media screen and (max-width: 768px) {
-  .searchForm {
-    flex-direction: column;
-  }
-}
-
-
 
 .inputContainer {
   display: flex;
   flex-direction: row;
   align-items: center;
-
 }
 
 .inputGroup {
-  margin-left: 1rem;
+  margin-left: 0.5rem;
   padding: 0.5rem;
   background-color: inherit;
   box-shadow:
@@ -35,12 +27,24 @@
   display: block;
 }
 
+
+
+.searchInput {
+  width: 10rem;
+  font-size: 1rem;
+  outline: none;
+}
+
+
 .dateInput {
   background-color: inherit;
   border: none;
   cursor: pointer;
   font-size: 1rem;
   outline: none;
+  padding-top: 0;
+
+
 }
 
 .dateInput::-webkit-calendar-picker-indicator {
@@ -61,11 +65,9 @@
 .searchButton {
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
   margin-left: 1rem;
   cursor: pointer;
-  height: 100%;
   background-color: #ffb703;
   color: #14213d;
   border: none;
@@ -77,10 +79,9 @@
 
 .changeButton {
   position: absolute;
-  left: 12rem;
-  margin-left: 4px;
+  left: 11rem;
+  margin-left: 8px;
   margin-top: 6px;
-
   background-color: inherit;
   border: none;
 }
@@ -104,4 +105,44 @@
 
 .airplaneIcon {
   font-size: 1.5rem;
+}
+
+@media screen and (max-width: 768px) {
+  .searchForm {
+    flex-direction: column;
+  }
+
+  .inputContainer {
+    flex-direction: row;
+  }
+
+
+  .inputGroup {
+    margin-left: 1rem;
+    margin-top: 1rem;
+    /* padding: 0.6rem 1.5rem 0.6rem 1rem; */
+  }
+
+  .searchButton {
+
+    margin-top: 1rem;
+    padding: 0.5rem 1rem;
+    flex-direction: row;
+    align-items: center;
+
+  }
+
+  .airplaneIcon {
+    margin-left: 0.5rem;
+  }
+
+  .dateInput {
+    padding-left: 1.3rem;
+    padding-bottom: 0.3rem;
+  }
+
+  .changeButton {
+    left: 12rem;
+    margin-top: 1.5rem
+  }
 }

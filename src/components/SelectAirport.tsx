@@ -1,6 +1,6 @@
 import AsyncSelect from "react-select/async";
 import { components } from "react-select";
-import styles from "./SelectAirport.module.css";
+import styles from "./SearchForm.module.css";
 import { AirportData } from "../types";
 
 const fetchAirportOptions = async (val: string) => {
