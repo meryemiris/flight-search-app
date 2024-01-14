@@ -1,11 +1,8 @@
 import { useRef, useState } from "react";
 
 import styles from "./Home.module.css";
-import searchFormStyles from "./SearchForm.module.css";
 import FlightList from "./FlightList";
-import SelectAirport from "./SelectAirport";
-import { MdChangeCircle } from "react-icons/md";
-import { IoIosAirplane } from "react-icons/io";
+import Form from "./Form";
 import { AirportData, FlightData } from "@/types";
 
 export default function Home() {
@@ -17,15 +14,17 @@ export default function Home() {
     null,
   );
   const [flightData, setFlightData] = useState<FlightData[]>([]);
-
-  const [errorMessage, setErrorMessage] = useState<string | null>(null);
-  const [loading, setLoading] = useState(false);
   const [activeSortBy, setActiveSortBy] = useState<string>("duration");
   const [isAscending, setIsAscending] = useState<boolean>(false);
 
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
+  const [loading, setLoading] = useState(false);
+
   const queryRef = useRef<URLSearchParams | null>(null);
 
-  async function handleFlightSearch(event: React.FormEvent<HTMLFormElement>) {
+  const handleFlightSearch = async (
+    event: React.FormEvent<HTMLFormElement>,
+  ) => {
     event.preventDefault();
 
     const formData = new FormData(event.currentTarget);
@@ -100,7 +99,7 @@ export default function Home() {
     } finally {
       setLoading(false);
     }
-  }
+  };
 
   const onSort = async (sortBy: string, asc: boolean | null) => {
     try {
@@ -128,9 +127,9 @@ export default function Home() {
     }
   };
 
-  function handleSearchType(event: React.ChangeEvent<HTMLInputElement>) {
+  const handleSearchType = (event: React.ChangeEvent<HTMLInputElement>) => {
     setIsRoundTrip(event.target.value === "roundTrip");
-  }
+  };
 
   const handleSwitchAirport = () => {
     const from = departureAirport;
@@ -139,102 +138,18 @@ export default function Home() {
     setArrivalAirport(from);
   };
 
-  const todaysDate = new Date().toISOString().split("T")[0];
-
   return (
     <>
-      <div className={styles.flightSearch}>
-        <main className={styles.searchBar}>
-          <div className={styles.flightTypeContainer}>
-            <input
-              id="oneWay"
-              type="radio"
-              name="searchType"
-              value="oneWay"
-              checked={!isRoundTrip}
-              onChange={handleSearchType}
-            />
-            <label htmlFor="oneWay">one way</label>
-
-            <input
-              id="roundTrip"
-              type="radio"
-              name="searchType"
-              value="roundTrip"
-              checked={isRoundTrip}
-              onChange={handleSearchType}
-            />
-            <label htmlFor="roundTrip">round trip</label>
-          </div>
-
-          <form
-            className={searchFormStyles.searchForm}
-            onSubmit={handleFlightSearch}
-          >
-            <div className={searchFormStyles.inputContainer}>
-              <SelectAirport
-                label="From City/Airport"
-                name="departureAirport"
-                value={departureAirport}
-                onChange={setDepartureAirport}
-              />
-              <button
-                className={searchFormStyles.changeButton}
-                onClick={handleSwitchAirport}
-                type="button"
-              >
-                <MdChangeCircle className={searchFormStyles.changeIcon} />
-              </button>
-              <SelectAirport
-                label="To City/Airport"
-                name="arrivalAirport"
-                value={arrivalAirport}
-                onChange={setArrivalAirport}
-              />
-            </div>
-            <div className={searchFormStyles.inputContainer}>
-              <div className={searchFormStyles.inputGroup}>
-                <label
-                  className={searchFormStyles.searchLabel}
-                  htmlFor="departureDate"
-                >
-                  Departure
-                </label>
-                <input
-                  id="departureDate"
-                  className={searchFormStyles.dateInput}
-                  type="date"
-                  name="departureDate"
-                  defaultValue={todaysDate}
-                  min={todaysDate}
-                />
-              </div>
-              {isRoundTrip && (
-                <div className={searchFormStyles.inputGroup}>
-                  <label
-                    className={searchFormStyles.searchLabel}
-                    htmlFor="returnDate"
-                  >
-                    Return
-                  </label>
-                  <input
-                    id="returnDate"
-                    className={searchFormStyles.dateInput}
-                    type="date"
-                    name="returnDate"
-                    min={todaysDate}
-                  />
-                </div>
-              )}
-            </div>
-
-            <button className={searchFormStyles.searchButton} type="submit">
-              Find Flights
-              <IoIosAirplane className={searchFormStyles.airplaneIcon} />
-            </button>
-          </form>
-        </main>
-      </div>
+      <Form
+        handleFlightSearch={handleFlightSearch}
+        handleSearchType={handleSearchType}
+        isRoundTrip={isRoundTrip}
+        departureAirport={departureAirport}
+        setDepartureAirport={setDepartureAirport}
+        arrivalAirport={arrivalAirport}
+        setArrivalAirport={setArrivalAirport}
+        handleSwitchAirport={handleSwitchAirport}
+      />
 
       <div className={styles.flightResults}>
         <FlightList
