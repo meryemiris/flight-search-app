@@ -1,6 +1,7 @@
 import { useRef, useState } from "react";
 
 import styles from "./Home.module.css";
+import SortButtons from "./SortButtons";
 import FlightList from "./FlightList";
 import Form from "./Form";
 import { AirportData, FlightData } from "@/types";
@@ -91,9 +92,9 @@ export default function Home() {
         setErrorMessage(
           "Oops! No flights found for the selected criteria. Please try again with different options.",
         );
-      } else {
-        setFlightData(data);
       }
+
+      setFlightData(data);
     } catch (error) {
       setErrorMessage("Oops! Something went wrong. Please try again later.");
     } finally {
@@ -101,14 +102,24 @@ export default function Home() {
     }
   };
 
-  const onSort = async (sortBy: string, asc: boolean | null) => {
+  const onSort = async (clickedSortBy: string) => {
     try {
       if (!queryRef.current) {
         return console.error("No query params found");
       }
 
-      queryRef.current.set("sortBy", sortBy);
-      queryRef.current.set("ascending", String(asc));
+      let currentAscending = isAscending;
+
+      // if the same sort option is clicked again, reverse the sort order
+      if (activeSortBy === clickedSortBy) {
+        currentAscending = !currentAscending;
+        setIsAscending((prevState) => !prevState);
+      }
+
+      setActiveSortBy(clickedSortBy);
+
+      queryRef.current.set("sortBy", clickedSortBy);
+      queryRef.current.set("ascending", String(currentAscending));
 
       const response = await fetch(`/api/flights?${queryRef.current}`);
       const data = await response.json();
@@ -152,15 +163,17 @@ export default function Home() {
       />
 
       <div className={styles.flightResults}>
+        {!loading && flightData.length ? (
+          <SortButtons
+            activeSortBy={activeSortBy}
+            isAscending={isAscending}
+            onSort={onSort}
+          />
+        ) : null}
         <FlightList
           flights={flightData}
           errorMessage={errorMessage}
           loading={loading}
-          activeSortBy={activeSortBy}
-          setActiveSortBy={setActiveSortBy}
-          isAscending={isAscending}
-          setIsAscending={setIsAscending}
-          onSort={onSort}
         />
       </div>
     </>
