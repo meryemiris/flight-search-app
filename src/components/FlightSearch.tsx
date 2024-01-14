@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 
 import styles from "./FlightSearch.module.css";
 import searchFormStyles from "./SearchForm.module.css";
@@ -7,8 +7,6 @@ import SelectAirport from "./SelectAirport";
 import { MdChangeCircle } from "react-icons/md";
 import { IoIosAirplane } from "react-icons/io";
 import { AirportData, FlightData } from "@/types";
-
-// const currentTime = new Date().toISOString().split("T")[0];
 
 export default function FlightSearch() {
   const [isRoundTrip, setIsRoundTrip] = useState(false);
@@ -23,7 +21,6 @@ export default function FlightSearch() {
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
 
-  const [sortBy, setSortBy] = useState<string>("price");
   const queryRef = useRef<URLSearchParams | null>(null);
 
   async function handleFlightSearch(event: React.FormEvent<HTMLFormElement>) {
@@ -38,28 +35,25 @@ export default function FlightSearch() {
       : null;
 
     if (!departureAirport) {
-      setErrorMessage("Please select a departure airport.");
-      return;
+      return setErrorMessage("Please select a departure airport.");
     }
 
     if (!arrivalAirport) {
-      setErrorMessage("Please select an arrival airport.");
-      return;
+      return setErrorMessage("Please select an arrival airport.");
     }
 
     if (departureAirport === arrivalAirport) {
-      setErrorMessage("Departure and arrival airports cannot be the same.");
-      return;
+      return setErrorMessage(
+        "Departure and arrival airports cannot be the same.",
+      );
     }
 
     if (!departureDate) {
-      setErrorMessage("Please select a departure date.");
-      return;
+      return setErrorMessage("Please select a departure date.");
     }
 
     if (isRoundTrip && !returnDate) {
-      setErrorMessage("Please select a return date.");
-      return;
+      return setErrorMessage("Please select a return date.");
     }
     if (
       !departureAirport ||
@@ -67,14 +61,13 @@ export default function FlightSearch() {
       !departureDate ||
       (isRoundTrip && !returnDate)
     ) {
-      setErrorMessage("Please fill all the fields.");
-      return;
+      return setErrorMessage("Please fill all the fields.");
     }
 
     if (
       isRoundTrip &&
       returnDate &&
-      new Date(departureDate) > new Date(returnDate)
+      new Date(departureDate as string) > new Date(returnDate)
     ) {
       return setErrorMessage("Return date could not be before departure date.");
     }
@@ -113,34 +106,26 @@ export default function FlightSearch() {
     }
   }
 
-  useEffect(() => {
-    if (queryRef.current && sortBy) {
-      const getSortedFlights = async () => {
-        try {
-          const response = await fetch(
-            `/api/flights?${queryRef.current}&sortBy=${sortBy}`,
-          );
-          const data = await response.json();
+  const onSort = async (sortBy: string) => {
+    try {
+      const response = await fetch(
+        `/api/flights?${queryRef.current}&sortBy=${sortBy}`,
+      );
+      const data = await response.json();
 
-          if (data.length === 0) {
-            setErrorMessage(
-              "Oops! No flights found for the selected criteria. Please try again with different options.",
-            );
-          } else {
-            setFlightData(data);
-          }
-        } catch (error) {
-          setErrorMessage(
-            "Oops! Something went wrong. Please try again later.",
-          );
-        } finally {
-          setLoading(false);
-        }
-      };
-
-      getSortedFlights();
+      if (data.length === 0) {
+        setErrorMessage(
+          "Oops! No flights found for the selected criteria. Please try again with different options.",
+        );
+      } else {
+        setFlightData(data);
+      }
+    } catch (error) {
+      setErrorMessage("Oops! Something went wrong. Please try again later.");
+    } finally {
+      setLoading(false);
     }
-  }, [sortBy]);
+  };
 
   function handleSearchType(event: React.ChangeEvent<HTMLInputElement>) {
     setIsRoundTrip(event.target.value === "roundTrip");
@@ -249,12 +234,14 @@ export default function FlightSearch() {
         </main>
       </div>
 
-      <FlightList
-        flights={flightData}
-        errorMessage={errorMessage}
-        loading={loading}
-        setSortBy={setSortBy}
-      />
+      <div className={styles.flightResults}>
+        <FlightList
+          flights={flightData}
+          errorMessage={errorMessage}
+          loading={loading}
+          onSort={onSort}
+        />
+      </div>
     </>
   );
 }

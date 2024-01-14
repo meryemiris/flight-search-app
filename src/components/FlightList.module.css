@@ -1,18 +1,7 @@
-.flightResults {
-  position: absolute;
-  top: 20rem;
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding-top: 1rem;
-}
-
 .sortBy {
   display: flex;
   flex-direction: row;
   justify-content: flex-end;
-
 }
 
 .sortBy button {
@@ -33,6 +22,10 @@
 
 .sortBy button:active {
   color: black;
+}
+
+.activeSort {
+  color: #ff9800;
 }
 
 
@@ -110,8 +103,6 @@
   display: flex;
   flex-direction: column;
   color: #14213d;
-
-  /* width: 10rem; */
   padding: 0.5rem;
   align-items: center;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
