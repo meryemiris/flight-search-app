@@ -103,6 +103,7 @@ export default function FlightSearch() {
       setErrorMessage("Oops! Something went wrong. Please try again later.");
     } finally {
       setLoading(false);
+      onSort("duration", true);
     }
   }
 
@@ -170,61 +171,62 @@ export default function FlightSearch() {
             className={searchFormStyles.searchForm}
             onSubmit={handleFlightSearch}
           >
-            <SelectAirport
-              label="From City/Airport"
-              name="departureAirport"
-              value={departureAirport}
-              onChange={setDepartureAirport}
-            />
-
-            <button
-              className={searchFormStyles.changeButton}
-              onClick={handleSwitchAirport}
-              type="button"
-            >
-              <MdChangeCircle className={searchFormStyles.changeIcon} />
-            </button>
-
-            <SelectAirport
-              label="To City/Airport"
-              name="arrivalAirport"
-              value={arrivalAirport}
-              onChange={setArrivalAirport}
-            />
-
-            <div className={searchFormStyles.inputGroup}>
-              <label
-                className={searchFormStyles.searchLabel}
-                htmlFor="departureDate"
+            <div className={searchFormStyles.inputContainer}>
+              <SelectAirport
+                label="From City/Airport"
+                name="departureAirport"
+                value={departureAirport}
+                onChange={setDepartureAirport}
+              />
+              <button
+                className={searchFormStyles.changeButton}
+                onClick={handleSwitchAirport}
+                type="button"
               >
-                Departure
-              </label>
-              <input
-                id="departureDate"
-                className={searchFormStyles.dateInput}
-                type="date"
-                name="departureDate"
-                defaultValue={todaysDate}
-                min={todaysDate}
+                <MdChangeCircle className={searchFormStyles.changeIcon} />
+              </button>
+              <SelectAirport
+                label="To City/Airport"
+                name="arrivalAirport"
+                value={arrivalAirport}
+                onChange={setArrivalAirport}
               />
             </div>
-            {isRoundTrip && (
+            <div className={searchFormStyles.inputContainer}>
               <div className={searchFormStyles.inputGroup}>
                 <label
                   className={searchFormStyles.searchLabel}
-                  htmlFor="returnDate"
+                  htmlFor="departureDate"
                 >
-                  Return
+                  Departure
                 </label>
                 <input
-                  id="returnDate"
+                  id="departureDate"
                   className={searchFormStyles.dateInput}
                   type="date"
-                  name="returnDate"
+                  name="departureDate"
+                  defaultValue={todaysDate}
                   min={todaysDate}
                 />
               </div>
-            )}
+              {isRoundTrip && (
+                <div className={searchFormStyles.inputGroup}>
+                  <label
+                    className={searchFormStyles.searchLabel}
+                    htmlFor="returnDate"
+                  >
+                    Return
+                  </label>
+                  <input
+                    id="returnDate"
+                    className={searchFormStyles.dateInput}
+                    type="date"
+                    name="returnDate"
+                    min={todaysDate}
+                  />
+                </div>
+              )}
+            </div>
 
             <button className={searchFormStyles.searchButton} type="submit">
               Find Flights

@@ -6,6 +6,21 @@
   padding: 1rem;
 }
 
+@media screen and (max-width: 768px) {
+  .searchForm {
+    flex-direction: column;
+  }
+}
+
+
+
+.inputContainer {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+
+}
+
 .inputGroup {
   margin-left: 1rem;
   padding: 0.5rem;
