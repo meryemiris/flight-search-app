@@ -106,10 +106,10 @@ export default function FlightSearch() {
     }
   }
 
-  const onSort = async (sortBy: string) => {
+  const onSort = async (sortBy: string, asc: boolean | null) => {
     try {
       const response = await fetch(
-        `/api/flights?${queryRef.current}&sortBy=${sortBy}`,
+        `/api/flights?${queryRef.current}&sortBy=${sortBy}&ascending=${asc}`,
       );
       const data = await response.json();
 

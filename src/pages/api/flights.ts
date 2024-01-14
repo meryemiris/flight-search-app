@@ -19,7 +19,7 @@ type ErrorResponse = {
 const sortByProperty = (
   flights: FlightData[],
   property: keyof FlightData,
-  ascending: boolean = true,
+  ascending: boolean,
 ): FlightData[] => {
   return flights.sort((a, b) => {
     if (ascending) {
@@ -40,6 +40,7 @@ export default function handler(
     departureDate,
     returnDate,
     sortBy,
+    ascending,
   } = req.query;
 
   if (!departureAirport || !arrivalAirport || !departureDate) {
@@ -67,21 +68,11 @@ export default function handler(
     flights = [...flights, ...returnFlights];
   }
 
-  switch (sortBy) {
-    case "price":
-      flights = sortByProperty(flights, sortBy);
-      break;
-    case "duration":
-      flights = sortByProperty(flights, sortBy);
-      break;
-    case "departureTime":
-      flights = sortByProperty(flights, sortBy);
-      break;
-    case "arrivalTime":
-      flights = sortByProperty(flights, sortBy);
-      break;
-    default:
-      flights = sortByProperty(flights, "price");
-  }
+  flights = sortByProperty(
+    flights,
+    sortBy as keyof FlightData,
+    ascending === "true",
+  );
+
   res.status(200).json(flights);
 }

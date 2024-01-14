@@ -1,10 +1,15 @@
+import { useState } from "react";
+
 import styles from "./FlightList.module.css";
 
-import { GiAirplaneArrival, GiAirplaneDeparture } from "react-icons/gi";
-import { FaSort } from "react-icons/fa";
 import { FlightData } from "@/types";
 import Loader from "./Loader";
-import { useState } from "react";
+
+import { FaSort, FaSortDown, FaSortUp } from "react-icons/fa";
+import { GrSort } from "react-icons/gr";
+import { GiAirplaneArrival, GiAirplaneDeparture } from "react-icons/gi";
+import { GrAscend } from "react-icons/gr";
+import { GrDescend } from "react-icons/gr";
 
 const SORT_OPTIONS = [
   {
@@ -29,7 +34,7 @@ type FlightListProps = {
   flights: FlightData[];
   errorMessage: string | null;
   loading: boolean;
-  onSort: (val: string) => void;
+  onSort: (val: string, isAscending: boolean | null) => void;
 };
 
 const FlightList: React.FC<FlightListProps> = ({
@@ -40,9 +45,27 @@ const FlightList: React.FC<FlightListProps> = ({
 }) => {
   const [activeSortBy, setActiveSortBy] = useState<string>("");
 
-  const sortFlightsBy = (val: string) => {
-    setActiveSortBy(val);
-    onSort(val);
+  const [sortOrders, setSortOrders] = useState<{
+    [key: string]: boolean | null;
+  }>(Object.fromEntries(SORT_OPTIONS.map(({ value }) => [value, true])));
+
+  const sortFlightsBy = (value: string) => {
+    setSortOrders((prevSortOrders) => {
+      const isAscending =
+        prevSortOrders[value] === null ? true : !prevSortOrders[value];
+
+      const newSortOrders = { ...prevSortOrders, [value]: isAscending };
+
+      setActiveSortBy(value);
+
+      Object.keys(newSortOrders)
+        .filter((key) => key !== value)
+        .forEach((key) => (newSortOrders[key] = null));
+
+      return newSortOrders;
+    });
+
+    onSort(value, sortOrders[value]);
   };
 
   if (loading) {
@@ -67,7 +90,14 @@ const FlightList: React.FC<FlightListProps> = ({
               onClick={() => sortFlightsBy(value)}
               className={activeSortBy === value ? styles.activeSort : ""}
             >
-              {label} <FaSort />
+              {label}
+              {sortOrders[value] === null && <FaSort />}
+
+              {activeSortBy === value && (
+                <>
+                  {sortOrders[value] === true ? <FaSortDown /> : <FaSortUp />}
+                </>
+              )}
             </button>
           ))}
         </div>
