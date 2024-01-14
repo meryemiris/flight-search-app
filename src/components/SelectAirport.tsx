@@ -1,6 +1,6 @@
 import AsyncSelect from "react-select/async";
 import { components } from "react-select";
-import styles from "./SearchForm.module.css";
+import styles from "./SelectAirport.module.css";
 import { AirportData } from "../types";
 
 const fetchAirportOptions = async (val: string) => {
@@ -31,6 +31,7 @@ const SelectAirport = ({ name, label, value, onChange }: Props) => {
       <AsyncSelect
         id={name}
         instanceId={name}
+        //react-select causes a hydration error, see
         // https://github.com/JedWatson/react-select/issues/5459#issuecomment-1875022105
         components={{
           Input: (props) => (

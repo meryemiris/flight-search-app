@@ -1,0 +1,21 @@
+.inputGroup {
+    margin-left: 0.5rem;
+    padding: 0.5rem;
+    background-color: inherit;
+    box-shadow:
+        0 4px 1px 0 rgba(0, 0, 0, 0.2),
+        0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.searchLabel {
+    font-size: 0.75rem;
+    display: block;
+}
+
+
+
+.searchInput {
+    width: 10rem;
+    font-size: 1rem;
+    outline: none;
+}
