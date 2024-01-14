@@ -34,12 +34,13 @@ Search:
 
 - Search flight based on for departure, arrival, and dates.
 - One-way flight option without requiring return date.
-- Autocomplete for airports.
-- Datepicker for selecting dates.
+- Select options for airports.
+- Datepicker for date select.
+- Error handling and form validation.
 
 Listing:
 
-- Sorting options for flights.
+- Sorting options for flights by price, duration and departure and, arrival times.
 - Loading animation until server responds.
 - Flight information display.
 
