@@ -54,6 +54,7 @@ export default function FlightSearch() {
       return setErrorMessage("Please select a departure date.");
     }
 
+    // bu case html'de artik
     if (isRoundTrip && !returnDate) {
       return setErrorMessage("Please select a return date.");
     }
@@ -215,6 +216,7 @@ export default function FlightSearch() {
                   name="departureDate"
                   defaultValue={todaysDate}
                   min={todaysDate}
+                  required
                 />
               </div>
               {isRoundTrip && (
@@ -231,6 +233,7 @@ export default function FlightSearch() {
                     type="date"
                     name="returnDate"
                     min={todaysDate}
+                    required
                   />
                 </div>
               )}
