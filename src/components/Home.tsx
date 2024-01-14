@@ -1,6 +1,6 @@
 import { useRef, useState } from "react";
 
-import styles from "./FlightSearch.module.css";
+import styles from "./Home.module.css";
 import searchFormStyles from "./SearchForm.module.css";
 import FlightList from "./FlightList";
 import SelectAirport from "./SelectAirport";
@@ -8,7 +8,7 @@ import { MdChangeCircle } from "react-icons/md";
 import { IoIosAirplane } from "react-icons/io";
 import { AirportData, FlightData } from "@/types";
 
-export default function FlightSearch() {
+export default function Home() {
   const [isRoundTrip, setIsRoundTrip] = useState(false);
   const [departureAirport, setDepartureAirport] = useState<AirportData | null>(
     null,

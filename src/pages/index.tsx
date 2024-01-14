@@ -1,8 +1,8 @@
-import FlightSearch from "@/components/FlightSearch";
+import Home from "@/components/Home";
 import Head from "next/head";
-import styles from "../styles/Home.module.css";
+import styles from "../styles/index.module.css";
 
-export default function Home() {
+export default function Index() {
   return (
     <>
       <Head>
@@ -17,7 +17,7 @@ export default function Home() {
         <h1>Choose Where to Explore!</h1>
       </header>
       <main>
-        <FlightSearch />
+        <Home />
       </main>
     </>
   );
