@@ -29,15 +29,15 @@ Feel free to use this sample data to explore the app's features.
 ## Features
 
 Search:
--Search flight based on for departure, arrival, and dates.
--One-way flight option without requiring return date.
--Autocomplete for airports.
--Datepicker for selecting dates.
+- Search flight based on for departure, arrival, and dates.
+- One-way flight option without requiring return date.
+- Autocomplete for airports.
+- Datepicker for selecting dates.
 
 Listing:
--Sorting options for flights.
--Loading animation until server responds.
--Flight information display.
+- Sorting options for flights.
+- Loading animation until server responds.
+- Flight information display.
 
 ## Technologies Used
 
