@@ -20,6 +20,8 @@ export default function FlightSearch() {
 
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
+  const [activeSortBy, setActiveSortBy] = useState<string>("duration");
+  const [isAscending, setIsAscending] = useState<boolean>(false);
 
   const queryRef = useRef<URLSearchParams | null>(null);
 
@@ -80,6 +82,8 @@ export default function FlightSearch() {
       arrivalAirport: arrivalAirport as string,
       departureDate: departureDate as string,
       returnDate: returnDate as string,
+      sortBy: activeSortBy,
+      ascending: String(isAscending),
     });
 
     queryRef.current = queryParams;
@@ -103,15 +107,19 @@ export default function FlightSearch() {
       setErrorMessage("Oops! Something went wrong. Please try again later.");
     } finally {
       setLoading(false);
-      onSort("duration", true);
     }
   }
 
   const onSort = async (sortBy: string, asc: boolean | null) => {
     try {
-      const response = await fetch(
-        `/api/flights?${queryRef.current}&sortBy=${sortBy}&ascending=${asc}`,
-      );
+      if (!queryRef.current) {
+        return console.error("No query params found");
+      }
+
+      queryRef.current.set("sortBy", sortBy);
+      queryRef.current.set("ascending", String(asc));
+
+      const response = await fetch(`/api/flights?${queryRef.current}`);
       const data = await response.json();
 
       if (data.length === 0) {
@@ -241,6 +249,10 @@ export default function FlightSearch() {
           flights={flightData}
           errorMessage={errorMessage}
           loading={loading}
+          activeSortBy={activeSortBy}
+          setActiveSortBy={setActiveSortBy}
+          isAscending={isAscending}
+          setIsAscending={setIsAscending}
           onSort={onSort}
         />
       </div>

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { Dispatch, SetStateAction } from "react";
 
 import styles from "./FlightList.module.css";
 
@@ -6,10 +6,7 @@ import { FlightData } from "@/types";
 import Loader from "./Loader";
 
 import { FaSort, FaSortDown, FaSortUp } from "react-icons/fa";
-import { GrSort } from "react-icons/gr";
 import { GiAirplaneArrival, GiAirplaneDeparture } from "react-icons/gi";
-import { GrAscend } from "react-icons/gr";
-import { GrDescend } from "react-icons/gr";
 
 const SORT_OPTIONS = [
   {
@@ -35,6 +32,10 @@ type FlightListProps = {
   errorMessage: string | null;
   loading: boolean;
   onSort: (val: string, isAscending: boolean | null) => void;
+  activeSortBy: string;
+  setActiveSortBy: (val: string) => void;
+  isAscending: boolean;
+  setIsAscending: Dispatch<SetStateAction<boolean>>;
 };
 
 const FlightList: React.FC<FlightListProps> = ({
@@ -42,30 +43,23 @@ const FlightList: React.FC<FlightListProps> = ({
   errorMessage,
   loading,
   onSort,
+  activeSortBy,
+  setActiveSortBy,
+  isAscending,
+  setIsAscending,
 }) => {
-  const [activeSortBy, setActiveSortBy] = useState<string>("");
-
-  const [sortOrders, setSortOrders] = useState<{
-    [key: string]: boolean | null;
-  }>(Object.fromEntries(SORT_OPTIONS.map(({ value }) => [value, true])));
-
   const sortFlightsBy = (value: string) => {
-    setSortOrders((prevSortOrders) => {
-      const isAscending =
-        prevSortOrders[value] === null ? true : !prevSortOrders[value];
+    let currentAscending = isAscending;
 
-      const newSortOrders = { ...prevSortOrders, [value]: isAscending };
+    // if the same sort option is clicked again, reverse the sort order
+    if (activeSortBy === value) {
+      currentAscending = !currentAscending;
+      setIsAscending((prevState) => !prevState);
+    }
 
-      setActiveSortBy(value);
+    setActiveSortBy(value);
 
-      Object.keys(newSortOrders)
-        .filter((key) => key !== value)
-        .forEach((key) => (newSortOrders[key] = null));
-
-      return newSortOrders;
-    });
-
-    onSort(value, sortOrders[value]);
+    onSort(value, currentAscending);
   };
 
   if (loading) {
@@ -91,12 +85,14 @@ const FlightList: React.FC<FlightListProps> = ({
               className={activeSortBy === value ? styles.activeSort : ""}
             >
               {label}
-              {sortOrders[value] === null && <FaSort />}
-
-              {activeSortBy === value && (
-                <>
-                  {sortOrders[value] === true ? <FaSortDown /> : <FaSortUp />}
-                </>
+              {activeSortBy === value ? (
+                isAscending ? (
+                  <FaSortUp />
+                ) : (
+                  <FaSortDown />
+                )
+              ) : (
+                <FaSort />
               )}
             </button>
           ))}
